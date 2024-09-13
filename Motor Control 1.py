@@ -32,7 +32,7 @@ parser = StrOutputParser()
 
 #prompt templates:
 
-system_template = "Translate the following into {direction}:"
+system_template = "Interpret the following command for motor control in a concise manner:"
 
 # Define the prompt
 prompt_template = ChatPromptTemplate.from_messages(
@@ -44,26 +44,31 @@ chain = prompt_template | model | parser
 
 # Function to process commands
 def process_command(command):
-    response = chain.invoke({"direction": "direction", "text": command})
+    response = chain.invoke({"text": command})
     print(response)
     if "forward" in response:
         #motor_forward()
         print("Yeah, I'll go forwards")
+        return True
     elif "backward" in response:
         #motor_backward()
         print("Yeah, I'll go backwards")
+        return True
     elif "stop" in response:
         print("Yeah, I'll stop")
         #motor_stop()
+        return True
     elif "quit" in response:
         return False
     else:
         print("Unknown command")
+        return True
 
 # Example usage
-while True:
+test = True
+while test==True:
     user_input = input("Enter command: ")
-    process_command(user_input)
+    test=process_command(user_input)
 
 
 
