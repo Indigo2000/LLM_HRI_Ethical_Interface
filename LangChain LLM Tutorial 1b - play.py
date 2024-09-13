@@ -38,8 +38,6 @@ prompt_template = ChatPromptTemplate.from_messages(
     [("system", system_template), ("user", "{text}")]
 )
 
-# result = prompt_template.invoke({"language": "italian", "text": "hi"})
-
 chain = prompt_template | model | parser
 
 answer = chain.invoke({"language": "italian", "text": user_input})
