@@ -7,7 +7,6 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
-
 # Loads OpenAI and LangChain Keys
 def load_keys():
     try:
@@ -31,6 +30,24 @@ os.environ["OPENAI_API_KEY"] = loaded_keys.get('OPENAI_API_KEY')
 # Set model and parser
 model = ChatOpenAI(model="gpt-4")
 parser = StrOutputParser()
+
+#Location of Map
+image_url = "Plan.png"
+
+#Load the image data is text
+image_data = base64.b64encode(httpx.get(image_url).content).decode("utf-8")
+
+#Prove the map has been loaded
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "List the rooms shown on this plan."},
+        {"type": "image_url", "image_url": {"url": f*data:image/png;base64,{image_data}"}},
+    ]
+)
+
+response = model.invoke([message])
+print(response.content)
+
 
 #prompt templates:
 
