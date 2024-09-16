@@ -1,3 +1,5 @@
+import httpx
+import base64
 import json
 import os
 from langchain_openai import ChatOpenAI
