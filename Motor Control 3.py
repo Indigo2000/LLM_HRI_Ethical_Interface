@@ -2,11 +2,13 @@ import httpx
 import base64
 import json
 import os
+import openai
 from PIL import Image
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
+from io import BytesIO
 
 # Loads OpenAI and LangChain Keys
 def load_keys():
@@ -33,23 +35,26 @@ model = ChatOpenAI(model="gpt-4")
 parser = StrOutputParser()
 
 #Location of Map
-image_path = "Plan.png"
+image_path = "Plan-small4.jpg"
 
 #Load the map image as text
 with open(image_path, "rb") as image_file:
     image_data = base64.b64encode(image_file.read()).decode("utf-8")
 
 #Prove the map has been loaded
-message = HumanMessage(
-    content=[
-        "List the rooms shown on this plan.",
-        f"data:image/png;base64,{image_data}"
+prompt = "List the rooms shown on this plan."
+
+response = openai.chat.completions.create(
+    model="gpt-4o",
+    messages=[
+    {"role": "system", "content": prompt},
+    {"role": "user", "content": f"<image>{image_data}</image>"}
     ]
 )
-
-response = model.invoke([message])
-print(response.content)
-
+    
+#reply = response['choices'][0]['message']['content']
+#print(reply)
+print(response)
 
 #prompt templates:
 
