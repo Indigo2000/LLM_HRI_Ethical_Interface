@@ -38,7 +38,7 @@ with open(image_path, "rb") as image_file:
     image_data = base64.b64encode(image_file.read()).decode("utf-8")
 
 #Prove the map has been loaded
-prompt = "List the rooms shown on this plan and their relative positions."
+prompt = "List the rooms shown on this plan."
 
 response = openai.chat.completions.create(
     model="gpt-4o",
