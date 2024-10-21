@@ -30,30 +30,6 @@ os.environ["LANGCHAIN_API_KEY"] = loaded_keys.get('LANGCHAIN_API_KEY')
 os.environ["LANGCHAIN_PROJECT"] = "LangChain Tutorial 1"
 os.environ["OPENAI_API_KEY"] = loaded_keys.get('OPENAI_API_KEY')
 
-#Location of Map
-image_path = "Plan-small4.jpg"
-
-#Load the map image as text
-with open(image_path, "rb") as image_file:
-    image_data = base64.b64encode(image_file.read()).decode("utf-8")
-
-#Prove the map has been loaded
-prompt = "List the rooms shown on this plan."
-
-response = openai.chat.completions.create(
-    model="gpt-4o",
-    messages=[
-    {"role": "system", "content": prompt},
-    {"role": "user", "content": f"<image>{image_data}</image>"}
-    ]
-)
-
-#completion_id = response['id']
-print(response.choices[0].message.content)
-
-#reply = response.get('content')
-#print(reply)
-#print(type(response))
 
 # Set model and parser
 model = ChatOpenAI(model="gpt-4o-mini")
