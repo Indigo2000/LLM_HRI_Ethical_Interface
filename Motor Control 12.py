@@ -42,7 +42,7 @@ goal_room = 'Lounge'
 #prompt templates:
 system_template_destination = "Find the destination room from this instruction and return the name of that room only:"
 system_template_directions = "Start room = {start_room} Goal room = {goal_room} Graph = {graph} and heuristics = {heuristic}"
-system_template_directions_output = "Return the directions from Start room to Goal room. Use A* search on the graph and heuristics provided. Only produce the final result. Your response must use only the exact phrases found in the third variable for each room shown in the graph variable."
+system_template_directions_output = "Return the route from Start room to Goal room. Use A* search on the graph and heuristics provided. Only return the names of the rooms you pass through in a concise manner. If you receive a goal room that is not in the list, do not perform the search and say only: 'That room is unknown'."
 
 #define the data for directions
 directions_data = {
@@ -60,33 +60,55 @@ prompt_template_directions = ChatPromptTemplate.from_messages([("system", system
 chain_destination = prompt_template_destination | model | parser
 chain_directions = prompt_template_directions | model | parser
 
-# Function to process commands
+# Function to find the destination
 def process_command_destination(command):
     response = chain_destination.invoke({"text": command})
     print("Destinaion response is: ")
     print(response)
+    
+    #Check if we have a valid room
+    try:
+        room = Layout.h[response]
+        directions_data["goal_room"] = response
+        return True
+    except:
+        print("No such room!\n")
+        #If room does not exist, set the goal room to be the start room
+        directions_data["goal_room"] =  directions_data["start_room"]
+        return False
+
+# Function to find the route
+def process_command_route(command):
+    response = chain_directions.invoke({"text": command})
+    print("\nRoute is: ", response, "\n")
     return response
-    
-#def process_command_directions(command):
-#    response = chain_directions.invoke({"text": command})
-#    print("Directions response is: ")
-#    print(response)
-#    return response
-    
+  
+
+#Main loop    
 quit = False
-print("Starting loop...")
 while quit == False:
+    #Get user input
     user_input = input("Enter command: ")
-    #update goal_room
-    directions_data["goal_room"]=process_command_destination(user_input)
-       
+    
+    #If user wishes to quit
     if user_input == 'quit':
         break;
-    get_directions = system_template_directions.format(**directions_data)
-    print(get_directions)
-    directions = chain_directions.invoke({"text": get_directions})
-    print("\n")
-    print(directions)
+    
+    #update goal_room    
+    if not process_command_destination(user_input.title()):
+        #restart loop if gaol room invalid
+        continue
+        
+    #State where we start and where we end    
+    print("Start room is: ", directions_data["start_room"])
+    print("Goal room is: ", directions_data["goal_room"])   
+    
+    #Get the route we'll take
+    directions = process_command_route(system_template_directions.format(**directions_data))
+    
+    #Simulate motor response    
+    print("\n\nNow I need to move the motor for this response: ", directions)
+    
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
 

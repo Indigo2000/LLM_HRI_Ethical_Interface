@@ -42,7 +42,7 @@ goal_room = 'Lounge'
 #prompt templates:
 system_template_destination = "Find the destination room from this instruction and return the name of that room only:"
 system_template_directions = "Start room = {start_room} Goal room = {goal_room} Graph = {graph} and heuristics = {heuristic}"
-system_template_directions_output = "Return the directions from Start room to Goal room. Use A* search on the graph and heuristics provided. Only produce the final result. Your response must use only the exact phrases found in the third variable for each room shown in the graph variable."
+system_template_directions_output = "Return the route from Start room to Goal room. Use A* search on the graph and heuristics provided. Only return the names of the rooms you pass through in a concise manner. If you receive a goal room that is not in the list, do not perform the search and say only: 'That room is unknown'."
 
 #define the data for directions
 directions_data = {
@@ -60,33 +60,41 @@ prompt_template_directions = ChatPromptTemplate.from_messages([("system", system
 chain_destination = prompt_template_destination | model | parser
 chain_directions = prompt_template_directions | model | parser
 
-# Function to process commands
+# Function to process find the destination
 def process_command_destination(command):
     response = chain_destination.invoke({"text": command})
     print("Destinaion response is: ")
     print(response)
     return response
     
-#def process_command_directions(command):
-#    response = chain_directions.invoke({"text": command})
-#    print("Directions response is: ")
-#    print(response)
-#    return response
-    
+
+#Main loop    
 quit = False
-print("Starting loop...")
 while quit == False:
     user_input = input("Enter command: ")
-    #update goal_room
-    directions_data["goal_room"]=process_command_destination(user_input)
-       
     if user_input == 'quit':
         break;
+    
+    #update goal_room    
+    directions_data["goal_room"]=process_command_destination(user_input.title())
+    
+    #Check if we have a valid room
+    try:
+        test = Layout.h[directions_data["goal_room"]]
+    except:
+        print("No such room!")
+        continue
+        
+    print("Start room is: ", directions_data["start_room"])
+    print("Goal room is: ", directions_data["goal_room"])   
+    
+    #Assemble the data for processing
     get_directions = system_template_directions.format(**directions_data)
-    print(get_directions)
+    
+    #Get the rooms we pass through
     directions = chain_directions.invoke({"text": get_directions})
-    print("\n")
-    print(directions)
+    print("\nRoute is: ", directions, "\n")
+    
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
 
