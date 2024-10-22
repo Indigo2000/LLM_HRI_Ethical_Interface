@@ -83,19 +83,4 @@ def a_star_search(graph, start, goal, h):
     return None, float('inf')
 
 # Example usage
-start_room = 'Hall'
-quit = False
 
-while quit == False:
-    goal_room = input("Enter destination: ")
-    if goal_room == 'quit':
-        break;
-    path, total_cost = a_star_search(graph, start_room, goal_room, h)
-    if path:
-        print(f"Path from {start_room} to {goal_room}:")
-        for room, direction in path:
-            print(f" - Move {direction} to {room}")
-        print(f"Total cost: {total_cost}")
-        start_room = goal_room
-    else:
-        print(f"No path found from {start_room} to {goal_room}.")

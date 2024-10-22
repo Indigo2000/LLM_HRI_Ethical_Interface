@@ -3,6 +3,7 @@ import base64
 import json
 import os
 import openai
+import Layout
 from PIL import Image
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -31,13 +32,16 @@ os.environ["LANGCHAIN_PROJECT"] = "LangChain Tutorial 1"
 os.environ["OPENAI_API_KEY"] = loaded_keys.get('OPENAI_API_KEY')
 
 
+
+
+
 # Set model and parser
 model = ChatOpenAI(model="gpt-4o-mini")
 parser = StrOutputParser()
 
 #prompt templates:
 
-system_template = "Interpret the following command for motor control in a concise manner:"
+system_template = "Find the destination room from this instruction and return the name of that room only:"
 
 # Define the prompt
 prompt_template = ChatPromptTemplate.from_messages(
@@ -50,31 +54,27 @@ chain = prompt_template | model | parser
 # Function to process commands
 def process_command(command):
     response = chain.invoke({"text": command})
+    print("Response is: ")
     print(response)
-    if "forward" in response:
-        #motor_forward()
-        print("Yeah, I'll go forwards")
-        return True
-    elif "backward" in response:
-        #motor_backward()
-        print("Yeah, I'll go backwards")
-        return True
-    elif "stop" in response:
-        print("Yeah, I'll stop")
-        #motor_stop()
-        return True
-    elif "cease" in response:
-        return False
-    else:
-        print("Unknown command")
-        return True
+    return response
 
-# Example usage
-test = True
-while test==True:
+start_room = 'Hall'
+quit = False
+
+while quit == False:
     user_input = input("Enter command: ")
-    test=process_command(user_input)
-
+    goal_room=process_command(user_input)
+    if goal_room == 'quit':
+        break;
+    path, total_cost = Layout.a_star_search(Layout.graph, start_room, goal_room, Layout.h)
+    if path:
+        print(f"Path from {start_room} to {goal_room}:")
+        for room, direction in path:
+            print(f" - Move {direction} to {room}")
+        print(f"Total cost: {total_cost}")
+        start_room = goal_room
+    else:
+        print(f"No path found from {start_room} to {goal_room}.")
 
 
 
