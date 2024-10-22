@@ -4,6 +4,7 @@ import json
 import os
 import openai
 import Layout
+import re
 #import GPIO_Communication
 from PIL import Image
 from langchain_openai import ChatOpenAI
@@ -47,8 +48,7 @@ goal_room = 'Lounge'
 #prompt templates:
 system_template_destination = "Find the destination room from this instruction and return the name of that room only:"
 system_template_directions = "Start room = {start_room} Goal room = {goal_room} Graph = {graph} and heuristics = {heuristic}"
-system_template_directions_output = "Return the route from Start room to Goal room. Use A* search on the graph and heuristics provided. Only return the names of the rooms you pass through as a python list. If you receive a goal room that is not in the list, do not perform the search and say only: 'That room is unknown'."
-#system_template_python_list_assemble = "Return a list in Python of the rooms listed" 
+system_template_directions_output = "Return the route from Start room to Goal room. Use A* search on the graph and heuristics provided. Only return the names of the rooms you pass through as a python list. If you receive a goal room that is not in the list, do not perform the search and say only: 'That room is unknown'." 
 
 #define the data for directions
 directions_data = {
@@ -58,15 +58,13 @@ directions_data = {
     "heuristic": Layout.h
     }
     
-# Define the prompt
+# Define the prompts
 prompt_template_destination = ChatPromptTemplate.from_messages([("system", system_template_destination), ("user", "{text}")])
 prompt_template_directions = ChatPromptTemplate.from_messages([("system", system_template_directions_output), ("user", "{text}")])
-#prompt_template_list_create = ChatPromptTemplate.from_messages([("system", system_template_python_list_assemble), ("user", "{text}")])
 
 #define the chains
 chain_destination = prompt_template_destination | model | parser
 chain_directions = prompt_template_directions | model | parser
-#chain_list_create = prompt_template_list_create | model | parser
 
 # Function to find the destination
 def process_command_destination(command):
@@ -88,13 +86,23 @@ def process_command_destination(command):
 # Function to find the route
 def process_command_route(command):
     response = chain_directions.invoke({"text": command})
-    print("\nRoute is: ", response, "\n")
     return response
+    
+def route_list_create(room_list):
+    #extract python list from text
+        # Use regular expression to capture list after equals sign until the last closing bracket
+    match = re.search(r'(\[[^\]]*\])', room_list)
+    if match:
+        extracted_list = match.group(1)
+        try:
+            # Safely evaluate the extracted list string into a Python list
+            result = eval(extracted_list)
+            if isinstance(result, list):
+                return result
+        except Exception as e:
+            print(f"Error evaluating list: {e}")
+    return None
 
-#def route_list_create(command):
-#    response = chain_list_create.invoke({"text": command})
-#    print("Python list is: ")
-#    print(response)
     
 # Function to control the motor
 def motion_control(route):
@@ -142,7 +150,8 @@ while quit == False:
     directions = process_command_route(system_template_directions.format(**directions_data))
     
     #Simulate motor response    
-    #route_list_create(directions)
+    route_list = route_list_create(directions)
+    print(route_list)
     
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
