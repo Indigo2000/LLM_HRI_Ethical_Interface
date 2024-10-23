@@ -16,42 +16,42 @@ h = {
 # Define the graph with directions
 graph = {
     'Hall': [
-        ('Study', 1, 'left'),
-        ('Lounge', 2, 'diagonally forward and left'),
-        ('Dining Room', 2, 'diagonally forward and right'),
-        ('Bathroom', 1, 'right'),
-        ('Bedroom 1', 3, 'forward, forward and left'),
-        ('Bedroom 2', 3, 'forward, forward and right')
+        ('Study', 10, 'left'),
+        ('Lounge', 20, 'diagonally forward and left'),
+        ('Dining Room', 20, 'diagonally forward and right'),
+        ('Bathroom', 10, 'right'),
+        ('Bedroom 1', 30, 'forward'),
+        ('Bedroom 2', 40, 'forward')
     ],
     'Study': [
-        ('Hall', 1, 'right')
+        ('Hall', 10, 'right')
     ],
     'Lounge': [
-        ('Hall', 1, 'diagonally right and back'),
-        ('Dining Room', 1, 'right')
+        ('Hall', 10, 'diagonally right and back'),
+        ('Dining Room', 10, 'right')
     ],
     'Dining Room': [
-        ('Hall', 1, 'diagonally left and back'),
-        ('Lounge', 1, 'left'),
-        ('Utility Room', 1, 'forward'),
-        ('Kitchen', 1, 'right')
+        ('Hall', 10, 'diagonally left and back'),
+        ('Lounge', 10, 'left'),
+        ('Utility Room', 10, 'forward'),
+        ('Kitchen', 10, 'right')
     ],
     'Bathroom': [
-        ('Hall', 1, 'left')
+        ('Hall', 10, 'left')
     ],
     'Utility Room': [
-        ('Dining Room', 1, 'back')
+        ('Dining Room', 10, 'back')
     ],
     'Kitchen': [
-        ('Dining Room', 1, 'left')
+        ('Dining Room', 10, 'left')
     ],
     'Bedroom 1': [
-        ('Hall', 3, 'right, back and back'),
-        ('Bedroom 2', 1, 'right')
+        ('Hall', 30, 'back'),
+        ('Bedroom 2', 10, 'right')
     ],
     'Bedroom 2': [
-        ('Hall', 3, 'left, back and back'),
-        ('Bedroom 1', 1, 'left')
+        ('Hall', 40, 'back'),
+        ('Bedroom 1', 10, 'left')
     ],
 }
 
@@ -81,6 +81,4 @@ def a_star_search(graph, start, goal, h):
             heapq.heappush(open_set, (tentative_f_score, tentative_g_score, neighbor, new_path))
 
     return None, float('inf')
-
-# Example usage
 

@@ -5,17 +5,15 @@ import os
 import openai
 import Layout
 import re
-#import GPIO_Communication
+import GPIO_Communication
 from PIL import Image
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from io import BytesIO
-
-
-import sys
-print(sys.executable)
+import concurrent.futures
+import asyncio
 
 # Loads OpenAI and LangChain Keys
 def load_keys():
@@ -105,7 +103,8 @@ def route_list_create(room_list):
     
 def directions_list_create(room_route):
     #Set the current room to be the start_room
-    current_room = start_room
+    print("Setting current room to: ", directions_data["start_room"])
+    current_room = directions_data["start_room"]
     
     #Create lists to store directions and distances
     directions_list = []
@@ -115,7 +114,7 @@ def directions_list_create(room_route):
     for item in room_route:
         
         #ignore start room
-        if item == start_room:
+        if item == directions_data["start_room"]:
             print("ignoring start room:", item)
             continue
             
@@ -132,26 +131,57 @@ def directions_list_create(room_route):
     
 # Function to control the motor
 def motion_control(route, distances):
-    print("To do")
     
-#      if "forward" in response:
-#        #motor_forward()
-#        print("Yeah, I'll go forwards")
-#        return True
-#    elif "backward" in response:
-#        #motor_backward()
-#        print("Yeah, I'll go backwards")
-#        return True
-#    elif "stop" in response:
-#        print("Yeah, I'll stop")
-#        #motor_stop()
-#        return True
-#    elif "quit" in response:
-#        return False
-#    else:
-#        print("Unknown command")
-#        return True  
-  
+    counter = 0
+    
+    for item in route:
+        print("Loop: ", counter, "item is: ", item)
+        if item == "forward":
+            async def move_f():
+                await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]))
+            asyncio.run(move_f())
+            
+        elif item == "back":
+            async def move_b():
+                await asyncio.gather(GPIO_Communication.motor_backward(distances[counter]))
+            asyncio.run(move_b())
+            
+        elif item == "left":
+            async def move_l():
+                await asyncio.gather(GPIO_Communication.motor_left(distances[counter]))
+            asyncio.run(move_l())
+        
+        elif item == "right":
+            async def move_r():
+                await asyncio.gather(GPIO_Communication.motor_right(distances[counter]))
+            asyncio.run(move_r())
+            
+        elif item == "diagonally forward and left":
+            async def move_fl():
+                await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]), GPIO_Communication.motor_left(distances[counter]))
+            asyncio.run(move_fl())
+        
+        elif item == "diagonally forward and right":
+            async def move_fr():
+                await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]), GPIO_Communication.motor_right(distances[counter]))
+            asyncio.run(move_fr())
+            
+        elif item == "diagonally right and back":
+            async def move_rb():
+                await asyncio.gather(GPIO_Communication.motor_backward(distances[counter]), GPIO_Communication.motor_right(distances[counter]))
+            asyncio.run(move_rb())
+            
+        elif item == "diagonally left and back":
+            async def move_lb():
+                await asyncio.gather(GPIO_Communication.motor_backward(distances[counter]), GPIO_Communication.motor_left(distances[counter]))
+            asyncio.run(move_lb())
+        
+        else:
+            print("Unknown command for motor control")
+        counter = counter + 1
+        #stop motors at the end of this loop
+        GPIO_Communication.motor_stop()
+        
 
 #Main loop    
 quit = False
@@ -178,9 +208,8 @@ while quit == False:
     #Simulate motor response    
     route_list = route_list_create(directions)
     print(route_list)
-    #directions_list, distance_list = 
-    directions_list_create(route_list)
-    #motion_control(directions_list, distance_list)
+    directions_list, distance_list = directions_list_create(route_list)
+    motion_control(directions_list, distance_list)
     
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
