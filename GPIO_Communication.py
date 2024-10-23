@@ -23,7 +23,7 @@ async def motor_backward(duration):
     await asyncio.sleep(duration)
 
 async def motor_left(duration):
-    motor_lr.forward(duration)
+    motor_lr.forward()
     await asyncio.sleep(duration)
 
 async def motor_right(duration):
