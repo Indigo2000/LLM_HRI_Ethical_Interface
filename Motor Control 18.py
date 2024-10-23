@@ -14,6 +14,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from io import BytesIO
 import concurrent.futures
 import asyncio
+import CommandQueue
 
 # Loads OpenAI and LangChain Keys
 def load_keys():
@@ -182,19 +183,17 @@ def motion_control(route, distances):
         GPIO_Communication.motor_stop()
         
 
-#Main loop    
-quit = False
-while quit == False:
-    #Get user input
-    user_input = input("Enter command: ")
+
+
+#Main function    
+async def main():
+    await asyncio.gather(CommandQueue.GetCommand())
+
+asyncio.run(main())
     
-    #If user wishes to quit
-    if user_input == 'quit':
-        break;
-    
-    #update goal_room if it's valid    
+    #update goal_room if it's valid   
     if not process_command_destination(user_input.title()):
-        #restart loop if gaol room invalid
+        #restart loop if goal room invalid
         continue
         
     #State where we start and where we end    
