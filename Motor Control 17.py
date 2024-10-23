@@ -1,18 +1,18 @@
-import httpx
-import base64
+#import httpx
+#import base64
 import json
 import os
 import openai
 import Layout
 import re
 import GPIO_Communication
-from PIL import Image
+#from PIL import Image
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
-from io import BytesIO
-import concurrent.futures
+#from io import BytesIO
+#import concurrent.futures
 import asyncio
 
 # Loads OpenAI and LangChain Keys
