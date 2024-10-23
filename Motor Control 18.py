@@ -187,9 +187,27 @@ def motion_control(route, distances):
 
 #Main function    
 async def main():
+    
+    #Stick this in a loop
+    
+    #Add other main async modules here when they are done: Action command, security check, ethical check
+    #Need some kind of global variable to quit them all
     await asyncio.gather(CommandQueue.GetCommand())
+    
+    #Add
 
 asyncio.run(main())
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     #update goal_room if it's valid   
     if not process_command_destination(user_input.title()):

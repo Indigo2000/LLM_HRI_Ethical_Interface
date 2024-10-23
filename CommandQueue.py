@@ -1,5 +1,6 @@
 import asyncio
 
+#Gets a user instruction
 async def GetCommand():
 	quit = False
     while quit == False:
@@ -9,7 +10,8 @@ async def GetCommand():
         #If user wishes to quit
         if user_input == 'quit':
             break;
-            
+
+#Actions a command            
 def ActionCommand():
     #Get command out of queue (FIFO) and action it	
     
