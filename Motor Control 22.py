@@ -132,7 +132,7 @@ def directions_list_create(room_route):
     return directions_list, distance_list
     
     # Function to control the motor
-async def motion_control(route, distances):
+async def motion_control(route, distances, rooms):
     
     counter = 0
     
@@ -180,9 +180,15 @@ async def motion_control(route, distances):
         
         else:
             print("Unknown command for motor control")
-        counter = counter + 1
-        #stop motors at the end of this loop
-        GPIO_Communication.motor_stop() 
+            
+        #stop motors after move
+        GPIO_Communication.motor_stop()
+    
+        counter = counter + 1    
+        
+        #update current position
+        print("Successfully moved from ", directions_data["start_room"], "to ", rooms[counter])
+        directions_data["start_room"] = rooms[counter]
         
 async def ActionCommand(command):
         
@@ -205,7 +211,7 @@ async def ActionCommand(command):
     route_list = route_list_create(directions)
     print(route_list)
     directions_list, distance_list = directions_list_create(route_list)
-    await motion_control(directions_list, distance_list)
+    await motion_control(directions_list, distance_list, route_list)
     
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
@@ -220,6 +226,18 @@ async def input_loop(queue):
         if user_input.lower() == 'quit':
             global_quit = True
             break
+        if user_input.lower() == 'stop':
+            #Stop the motors
+            GPIO_Communication.motor_stop()
+            #End current task? Or do I do try motor_stop() and except
+            
+            #purge queue
+            while not queue.empty():
+                await queue.get()
+                queue.task_done()
+            #Mark the stop command as done
+            queue.task_done()
+            break;
 
 async def process_commands(queue):
     global global_quit
@@ -231,6 +249,7 @@ async def process_commands(queue):
             global_quit = True
             queue.task_done()
             continue
+        
         print(f"Processing command: {command}")
         # Action a user command
         await ActionCommand(command)
@@ -239,11 +258,15 @@ async def process_commands(queue):
 
 async def main():
     queue = asyncio.Queue()
-    producer = asyncio.create_task(input_loop(queue))
-    consumer = asyncio.create_task(process_commands(queue))
+    while global_quit == False:
+        producer = asyncio.create_task(input_loop(queue))
+        consumer = asyncio.create_task(process_commands(queue))
 
-    # Wait for both the producer and consumer to finish
-    await asyncio.gather(producer, consumer)
+        # Wait for both the producer and consumer to finish
+        done, pending = await asyncio.wait([producer, consumer], return_when=asyncio.FIRST_COMPLETED)
+        
+        if producer in done:
+            consumer.cancel()
 
 if __name__ == "__main__":
     asyncio.run(main())
