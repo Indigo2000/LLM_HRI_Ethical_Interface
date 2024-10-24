@@ -56,7 +56,7 @@ chain_directions = prompt_template_directions | model | parser
 #Setup queue
 fifo_queue = deque()
 
-#Setup global quit
+#Setup global variables
 global_quit = False
 
 executor = ThreadPoolExecutor(1)
@@ -80,36 +80,26 @@ def get_input():
         global_quit = True
     else:
         fifo_queue.append(user_input)
-    
-#async def get_user_input():
-#    print("In get user input")
-#    await asyncio.gather(get_input())
-#    print("leaving get user input")
 
 #Gets a user instruction and add it to the queue
 async def GetUserCommand():
     global global_quit
     
-    print("In get user command")
-    
+    print("In get user command")    
     loop = asyncio.get_running_loop()
     
     while global_quit == False:
         print("In the get user command loop")
         await loop.run_in_executor(executor, get_input())
        
-
+#Gets a command from the queue and actions it
 async def get_item():
     global fifo_queue
     
     while len(fifo_queue) !=0:
             print("In the instruction loop")
             instruction = fifo_queue.popleft()
-            await ActionCommand(instruction)
-
-#async def retreive_from_queue():
-#    print("In retreive from queue")
-#    await asyncio.gather(get_item())        
+            await ActionCommand(instruction)      
 
 #Actions a command            
 async def RetreiveCommand():
@@ -118,9 +108,9 @@ async def RetreiveCommand():
     
     print("In retreive command")
     #loop on global and loop on queue
-    while global_quit == False:
+    #while global_quit == False:
         #print("In the retreive command loop")
-        await get_item()        
+    await get_item()        
 
 # Function to find the route
 def process_command_route(command):
@@ -264,3 +254,30 @@ async def ActionCommand(command):
     
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
+    
+#Main function    
+async def main():
+    
+    global global_quit
+    
+    while global_quit == False:
+        
+        #Add other main async modules here when they are done: Action command, security check, ethical check
+    
+        user_input_task = asyncio.create_task(GetUserCommand())
+        action_commands_task = asyncio.create_task(RetreiveCommand())
+    
+        done, pending = await asyncio.wait([user_input_task, action_commands_task], return_when=asyncio.FIRST_COMPLETED)
+        
+        if action_commands_task in pending:
+            print("action commands pending")
+        
+        if user_input_task in done:
+            print("User input done")
+            while action_commands_task in pending:
+                await GetUserCommand()
+        
+    
+
+
+asyncio.run(main())

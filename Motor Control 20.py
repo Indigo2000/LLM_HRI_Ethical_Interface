@@ -56,10 +56,8 @@ chain_directions = prompt_template_directions | model | parser
 #Setup queue
 fifo_queue = deque()
 
-#Setup global quit
+#Setup global variables
 global_quit = False
-
-executor = ThreadPoolExecutor(1)
 
 #define the data for directions
 directions_data = {
@@ -80,36 +78,26 @@ def get_input():
         global_quit = True
     else:
         fifo_queue.append(user_input)
-    
-#async def get_user_input():
-#    print("In get user input")
-#    await asyncio.gather(get_input())
-#    print("leaving get user input")
 
 #Gets a user instruction and add it to the queue
 async def GetUserCommand():
     global global_quit
     
-    print("In get user command")
-    
+    print("In get user command")    
     loop = asyncio.get_running_loop()
     
     while global_quit == False:
         print("In the get user command loop")
-        await loop.run_in_executor(executor, get_input())
+        get_input()
        
-
+#Gets a command from the queue and actions it
 async def get_item():
     global fifo_queue
     
     while len(fifo_queue) !=0:
             print("In the instruction loop")
             instruction = fifo_queue.popleft()
-            await ActionCommand(instruction)
-
-#async def retreive_from_queue():
-#    print("In retreive from queue")
-#    await asyncio.gather(get_item())        
+            await ActionCommand(instruction)      
 
 #Actions a command            
 async def RetreiveCommand():
@@ -264,3 +252,47 @@ async def ActionCommand(command):
     
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
+    
+async def input_loop(queue):
+    global global_quit
+    loop = asyncio.get_running_loop()
+    while True:
+        # Get user input without blocking the event loop
+        user_input = await loop.run_in_executor(None, input, "Enter command (or 'quit' to exit): ")
+        await queue.put(user_input)
+        if user_input.lower() == 'quit':
+            #global_quit = True
+            break
+
+async def process_commands(queue):
+    global global_quit
+    while True:
+        # Retrieve the next command from the queue
+        command = await queue.get()
+        if command.lower() == 'quit':
+            print("Exiting command processor.")
+            queue.task_done()
+            break
+        print(f"Processing command: {command}")
+        # Simulate a time-consuming asynchronous operation
+        await ActionCommand(command)  # Replace with your actual async processing
+        print(f"Finished processing command: {command}")
+        queue.task_done()
+
+async def main():
+    queue = asyncio.Queue()
+    producer = asyncio.create_task(input_loop(queue))
+    consumer = asyncio.create_task(process_commands(queue))
+
+    # Wait for both the producer and consumer to finish
+    await asyncio.gather(producer, consumer)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+        
+        
+
+    
+
+
+asyncio.run(main())
