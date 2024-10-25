@@ -78,8 +78,7 @@ def process_command_route(command):
 # Function to find the destination
 def process_command_destination(command):
     response = chain_destination.invoke({"text": command})
-    print("Destinaion response is: ")
-    print(response)
+    print("Destinaion is: ", response)
     
     #Check if we have a valid room
     try:
@@ -108,7 +107,6 @@ def route_list_create(room_list):
 
 def directions_list_create(room_route):
     #Set the current room to be the start_room
-    print("Setting current room to: ", directions_data["start_room"])
     current_room = directions_data["start_room"]
     
     #Create lists to store directions and distances
@@ -120,9 +118,8 @@ def directions_list_create(room_route):
         
         #ignore start room
         if item == directions_data["start_room"]:
-            print("ignoring start room:", item)
             continue
-            
+            f
         #Look through the list of available rooms from the current room
         for room in Layout.graph[current_room]:
             if room[0] == item:
@@ -140,7 +137,7 @@ async def motion_control(route, distances, rooms):
     counter = 0
     
     for item in route:
-        print("Loop: ", counter, "item is: ", item)
+        print("Moving", item)
         if item == "forward":
             async def move_f():
                 await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]))
@@ -191,6 +188,7 @@ async def motion_control(route, distances, rooms):
         
         #update current position
         print("Successfully moved from ", directions_data["start_room"], "to ", rooms[counter])
+        print("Setting current room to", rooms[counter])
         directions_data["start_room"] = rooms[counter]
         
 async def ActionCommand(command):
@@ -212,7 +210,7 @@ async def ActionCommand(command):
     
     #Simulate motor response    
     route_list = route_list_create(directions)
-    print(route_list)
+    print("Route is: ", route_list)
     directions_list, distance_list = directions_list_create(route_list)
     await motion_control(directions_list, distance_list, route_list)
     
@@ -222,12 +220,9 @@ async def ActionCommand(command):
 async def input_loop(queue, gui_app):
     global global_quit
     #loop = asyncio.get_running_loop()
-    print("In input_loop")
     while global_quit == False:
-        print("il-1")
         # Get user input without blocking the event loop
         user_input = await gui_app.get_input()
-        print("il-2")
         await queue.put(user_input)
         if user_input.lower() == 'quit':
             global_quit = True
@@ -235,19 +230,19 @@ async def input_loop(queue, gui_app):
         if user_input.lower() == 'stop':
             #Stop the motors
             GPIO_Communication.motor_stop()
-            #End current task? Or do I do try motor_stop() and except
-            
+                        
             #purge queue
             while not queue.empty():
                 await queue.get()
                 queue.task_done()
             #Mark the stop command as done
             queue.task_done()
+            # Inform user
+            print("Stop command received. Current task aborted and all future tasks cancelled.")
             break;
 
 async def process_commands(queue):
     global global_quit
-    print("In process commands")
     while global_quit == False:
         # Retrieve the next command from the queue
         command = await queue.get()
@@ -261,6 +256,7 @@ async def process_commands(queue):
         # Action a user command
         await ActionCommand(command)
         print(f"Finished processing command: {command}")
+        print("\n")
         queue.task_done()
 
 class GUIApp():
@@ -318,7 +314,6 @@ async def main():
         producer = asyncio.create_task(input_loop(queue, gui_app))
         consumer = asyncio.create_task(process_commands(queue))
         gui_refresh = asyncio.create_task(update_tk(root))
-        print("About to wait")
         # Look out for producer to send stop command so we can cancel the consumer tasks
         # Or, if GUI is closed, kill everything
         done, pending = await asyncio.wait([producer, consumer, gui_refresh], return_when=asyncio.FIRST_COMPLETED)
