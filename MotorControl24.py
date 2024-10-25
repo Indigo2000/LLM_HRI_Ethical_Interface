@@ -11,8 +11,9 @@ from langchain_core.prompts import ChatPromptTemplate
 import asyncio
 from collections import deque
 from concurrent.futures import ThreadPoolExecutor
+import tkinter as tk
 
-import GUI
+#import GUI
 
 # Loads OpenAI and LangChain Keys
 def load_keys():
@@ -67,7 +68,7 @@ directions_data = {
     "goal_room": goal_room,
     "graph": Layout.graph,
     "heuristic": Layout.h
-    }      
+    }
 
 # Function to find the route
 def process_command_route(command):
@@ -218,12 +219,15 @@ async def ActionCommand(command):
     #update start room
     directions_data["start_room"] = directions_data["goal_room"]
     
-async def input_loop(queue):
+async def input_loop(queue, gui_app):
     global global_quit
-    loop = asyncio.get_running_loop()
+    #loop = asyncio.get_running_loop()
+    print("In input_loop")
     while global_quit == False:
+        print("il-1")
         # Get user input without blocking the event loop
-        user_input = await loop.run_in_executor(None, input, "Enter command (or 'quit' to exit): ")
+        user_input = await gui_app.get_input()
+        print("il-2")
         await queue.put(user_input)
         if user_input.lower() == 'quit':
             global_quit = True
@@ -243,6 +247,7 @@ async def input_loop(queue):
 
 async def process_commands(queue):
     global global_quit
+    print("In process commands")
     while global_quit == False:
         # Retrieve the next command from the queue
         command = await queue.get()
@@ -258,14 +263,49 @@ async def process_commands(queue):
         print(f"Finished processing command: {command}")
         queue.task_done()
 
-async def main():
-    queue = asyncio.Queue()
-    while global_quit == False:
-        producer = asyncio.create_task(input_loop(queue))
-        consumer = asyncio.create_task(process_commands(queue))
+class GUIApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.geometry("300x100")
+        self.entry = tk.Entry(self.root)
+        self.entry.pack()
+        self.button = tk.Button(self.root, text="Submit", command=self.submit_input)
+        self.button.pack()
+        self.input_future = None
 
+    def submit_input(self):
+        # When the button is clicked, set the result of the future to the user input
+        if self.input_future:
+            self.input_future.set_result(self.entry.get())
+
+    async def get_input(self):
+        # Create a new future and wait for input from the GUI
+        self.input_future = asyncio.get_event_loop().create_future()
+        return await self.input_future
+
+async def update_tk(root):
+    while global_quit == False:
+        root.update()
+        await asyncio.sleep(0.01)
+
+async def main():
+    
+    # Set up the GUI
+    root = tk.Tk()
+    gui_app = GUIApp(root)
+    
+    queue = asyncio.Queue()
+    
+    # Run the asyncio event loop with the Tkinter main loop
+    loop = asyncio.get_event_loop()
+    
+    while global_quit == False:
+        producer = asyncio.create_task(input_loop(queue, gui_app))
+        consumer = asyncio.create_task(process_commands(queue))
+        gui_refresh = asyncio.create_task(update_tk(root))
+        print("About to wait")
         # Wait for both the producer and consumer to finish
-        done, pending = await asyncio.wait([producer, consumer], return_when=asyncio.FIRST_COMPLETED)
+        done, pending = await asyncio.wait([producer, consumer, gui_refresh], return_when=asyncio.FIRST_COMPLETED)
         
         if producer in done:
             consumer.cancel()
