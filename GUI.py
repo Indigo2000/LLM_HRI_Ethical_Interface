@@ -14,11 +14,14 @@ entry.pack()
 
 # Async function to handle user input
 async def send_input():
+    global gloal_quit
+    
     user_input = entry.get()
-    if user_input.lower() == 'exit':
+    if user_input.lower() == 'quit':
         root.quit()  # Close GUI
+        global_quit = True
     else:
-        await loop.sock_sendall(client_socket, user_input.encode('utf-8'))
+        return user_input
 
 # Function to run tkinter's mainloop in the asyncio event loop
 async def run_tk():
@@ -26,16 +29,13 @@ async def run_tk():
         root.update()  # Update the Tkinter GUI
         await asyncio.sleep(0.01)  # Avoid blocking the event loop
 
-# Set up client socket (for the sake of example)
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect(('localhost', 12345))
+async def run_gui():
+    # Asyncio event loop setup
+    loop = asyncio.get_running_loop()
 
-# Asyncio event loop setup
-loop = asyncio.get_event_loop()
+    # Tkinter button to trigger sending input
+    button = tk.Button(root, text="Send", command=lambda: loop.create_task(send_input()))
+    button.pack()
 
-# Tkinter button to trigger sending input
-button = tk.Button(root, text="Send", command=lambda: loop.create_task(send_input()))
-button.pack()
-
-# Run both the Tkinter main loop and asyncio loop
-loop.run_until_complete(run_tk())
+    # Run both the Tkinter main loop and asyncio loop
+    loop.run_until_complete(run_tk())

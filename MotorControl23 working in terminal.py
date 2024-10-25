@@ -12,6 +12,8 @@ import asyncio
 from collections import deque
 from concurrent.futures import ThreadPoolExecutor
 
+import GUI
+
 # Loads OpenAI and LangChain Keys
 def load_keys():
     try:
