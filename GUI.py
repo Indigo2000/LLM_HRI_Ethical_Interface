@@ -1,41 +1,60 @@
-import asyncio
 import tkinter as tk
-import socket
+import asyncio
 
-# Set up Tkinter window
-root = tk.Tk()
-root.title("Async Input GUI")
+class GUIApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.geometry("300x100")
+        self.entry = tk.Entry(self.root)
+        self.entry.pack()
+        self.button = tk.Button(self.root, text="Submit", command=self.submit_input)
+        self.button.pack()
+        self.input_future = None
 
-label = tk.Label(root, text="Enter Command:")
-label.pack()
+    def submit_input(self):
+        # When the button is clicked, set the result of the future to the user input
+        if self.input_future:
+            self.input_future.set_result(self.entry.get())
 
-entry = tk.Entry(root)
-entry.pack()
+    async def get_input(self):
+        # Create a new future and wait for input from the GUI
+        self.input_future = asyncio.get_event_loop().create_future()
+        return await self.input_future
 
-# Async function to handle user input
-async def send_input():
-    global gloal_quit
+async def input_loop(queue, gui_app):
+    global quit
+    while not quit:
+        # Get input from the GUI
+        user_input = await gui_app.get_input()
+        await queue.put(user_input)
+        if user_input.lower() == 'quit':
+            quit = True
+            break
+        elif user_input.lower() == 'stop':
+            # Stop motors or other tasks
+            print("Stop command received.")
+            # Clear the queue or any other actions
+            while not queue.empty():
+                await queue.get()
+                queue.task_done()
+            break
+
+if __name__ == "__main__":
+    quit = False
+    root = tk.Tk()
+    gui_app = GUIApp(root)
     
-    user_input = entry.get()
-    if user_input.lower() == 'quit':
-        root.quit()  # Close GUI
-        global_quit = True
-    else:
-        return user_input
-
-# Function to run tkinter's mainloop in the asyncio event loop
-async def run_tk():
-    while True:
-        root.update()  # Update the Tkinter GUI
-        await asyncio.sleep(0.01)  # Avoid blocking the event loop
-
-async def run_gui():
-    # Asyncio event loop setup
-    loop = asyncio.get_running_loop()
-
-    # Tkinter button to trigger sending input
-    button = tk.Button(root, text="Send", command=lambda: loop.create_task(send_input()))
-    button.pack()
-
-    # Run both the Tkinter main loop and asyncio loop
-    loop.run_until_complete(run_tk())
+    queue = asyncio.Queue()
+    
+    # Run the asyncio event loop with the Tkinter main loop
+    loop = asyncio.get_event_loop()
+    
+    async def main():
+        await asyncio.gather(
+            input_loop(queue, gui_app)
+        )
+    
+    loop.create_task(main())
+    
+    # Tkinter main loop
+    root.mainloop()
