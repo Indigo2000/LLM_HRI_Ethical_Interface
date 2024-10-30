@@ -72,7 +72,7 @@ graph = {
     'Bedroom 2': [
         ('Hall', 15, 'back'),
         ('Bedroom 1', 5, 'left')
-    ]
+    ],
 }
 
 # Implementation of A* search to return list of rooms to pass through
