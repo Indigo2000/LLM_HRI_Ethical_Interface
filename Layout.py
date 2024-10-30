@@ -16,42 +16,42 @@ h = {
 # Define the graph with directions
 graph = {
     'Hall': [
-        ('Study', 10, 'left'),
-        ('Lounge', 20, 'diagonally forward and left'),
-        ('Dining Room', 20, 'diagonally forward and right'),
-        ('Bathroom', 10, 'right'),
-        ('Bedroom 1', 30, 'forward'),
-        ('Bedroom 2', 40, 'forward')
+        ('Study', 5, 'left'),
+        ('Lounge', 10, 'diagonally forward and left'),
+        ('Dining Room', 10, 'diagonally forward and right'),
+        ('Bathroom', 5, 'right'),
+        ('Bedroom 1', 15, 'forward'),
+        ('Bedroom 2', 20, 'forward')
     ],
     'Study': [
-        ('Hall', 10, 'right')
+        ('Hall', 5, 'right')
     ],
     'Lounge': [
-        ('Hall', 10, 'diagonally right and back'),
-        ('Dining Room', 10, 'right')
+        ('Hall', 5, 'diagonally right and back'),
+        ('Dining Room', 5, 'right')
     ],
     'Dining Room': [
-        ('Hall', 10, 'diagonally left and back'),
-        ('Lounge', 10, 'left'),
-        ('Utility Room', 10, 'forward'),
-        ('Kitchen', 10, 'right')
+        ('Hall', 5, 'diagonally left and back'),
+        ('Lounge', 5, 'left'),
+        ('Utility Room', 5, 'forward'),
+        ('Kitchen', 5, 'right')
     ],
     'Bathroom': [
-        ('Hall', 10, 'left')
+        ('Hall', 5, 'left')
     ],
     'Utility Room': [
-        ('Dining Room', 10, 'back')
+        ('Dining Room', 5, 'back')
     ],
     'Kitchen': [
-        ('Dining Room', 10, 'left')
+        ('Dining Room', 5, 'left')
     ],
     'Bedroom 1': [
-        ('Hall', 30, 'back'),
-        ('Bedroom 2', 10, 'right')
+        ('Hall', 15, 'back'),
+        ('Bedroom 2', 5, 'right')
     ],
     'Bedroom 2': [
-        ('Hall', 40, 'back'),
-        ('Bedroom 1', 10, 'left')
+        ('Hall', 20, 'back'),
+        ('Bedroom 1', 5, 'left')
     ],
 }
 

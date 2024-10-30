@@ -12,30 +12,7 @@ from langchain_core.prompts import ChatPromptTemplate
 import asyncio
 from collections import deque
 import tkinter as tk
-
-# Loads OpenAI and LangChain Keys
-def load_keys():
-    try:
-        file = open("../Keys/RPKeys.json")
-        keys = json.load(file)
-        print("Keys loaded.")
-        file.close()
-        return keys
-
-    except FileNotFoundError:
-        print("File not Found")
-        
-# Load Keys and set environment variables
-loaded_keys = load_keys()
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
-os.environ["LANGCHAIN_API_KEY"] = loaded_keys.get('LANGCHAIN_API_KEY')
-os.environ["LANGCHAIN_PROJECT"] = "LangChain Tutorial 1"
-os.environ["OPENAI_API_KEY"] = loaded_keys.get('OPENAI_API_KEY')
-
-# Set model and parser
-model = ChatOpenAI(model="gpt-4o-mini")
-parser = StrOutputParser()
+import Config
 
 # Set the initial start and end positions
 start_room = 'Hall'
@@ -51,8 +28,8 @@ prompt_template_destination = ChatPromptTemplate.from_messages([("system", syste
 prompt_template_directions = ChatPromptTemplate.from_messages([("system", system_template_directions_output), ("user", "{text}")])
 
 # Define the chains
-chain_destination = prompt_template_destination | model | parser
-chain_directions = prompt_template_directions | model | parser
+chain_destination = prompt_template_destination | Config.model | Config.parser
+chain_directions = prompt_template_directions | Config.model | Config.parser
 
 # Setup global quit variable
 global_quit = False
@@ -206,9 +183,6 @@ async def input_loop(queue, gui_app):
         # Get user input without blocking the event loop
         user_input = await gui_app.get_input()
         
-        # Check command for ethical issues
-        await EthicalControl.check_ethics(user_input)
-        await queue.put(user_input)
         if user_input.lower() == 'quit':
             # If user has typed quit, stop the motors and quit the program
             GPIO_Communication.motor_stop()
@@ -222,17 +196,32 @@ async def input_loop(queue, gui_app):
             while not queue.empty():
                 await queue.get()
                 queue.task_done()
-            #Mark the stop command as done
-            queue.task_done()
             # Inform user
             print("\nStop command received. Current task aborted and all future tasks cancelled.")
             break;
+            
+        # Check command for ethical issues. If issue found, restart loop. Otherwise, add the command to the loop
+        if await EthicalControl.check_ethics(user_input):
+            continue
+        else:
+            await queue.put(user_input)
 
 async def process_commands(queue):
     global global_quit
+    # Notification of queue being empty set to true initially because we do not need to notify on program launch
+    empty_notified = True
     while global_quit == False:
         # Retrieve the next command from the queue
+        if queue.empty() and not empty_notified:
+            empty_notified = True
+            print("Awaiting further instructions...\n")
+            await asyncio.sleep(10)
+            print("Returning to charge and awaiting further instructions.\n")
+            await ActionCommand("Hall")
+            print("\nAwaiting further instructions...\n")
+            
         command = await queue.get()
+        empty_notified = False
         if command.lower() == 'quit':
             print("Exiting command processor.")
             global_quit = True
@@ -308,12 +297,9 @@ async def main():
         consumer = asyncio.create_task(process_commands(queue))
         gui_refresh = asyncio.create_task(update_tk(root))
         # Look out for producer to send stop command so we can cancel the consumer tasks
-        # Or, if GUI is closed, kill everything
-        done, pending = await asyncio.wait([producer, consumer, gui_refresh], return_when=asyncio.FIRST_COMPLETED)
-        
+        done, pending = await asyncio.wait([producer, consumer, gui_refresh], return_when=asyncio.FIRST_COMPLETED)        
         if producer in done:
             consumer.cancel()
-       # if 
 
 if __name__ == "__main__":
     asyncio.run(main())
