@@ -238,7 +238,7 @@ async def input_loop(queue, gui_app):
             #Mark the stop command as done
             queue.task_done()
             # Inform user
-            print("Stop command received. Current task aborted and all future tasks cancelled.")
+            print("\nStop command received. Current task aborted and all future tasks cancelled.")
             break;
 
 async def process_commands(queue):
