@@ -19,7 +19,7 @@ start_room = 'Hall'
 goal_room = 'Lounge'
 
 # Prompt templates
-system_template_destination = "Find the destination room from this instruction and return the name of that room only:"
+system_template_destination = "Find the destination room/utility from this instruction and return its name. Your options are limited to the names contained in the list provided. "
 system_template_directions = "Start room = {start_room} Goal room = {goal_room} Graph = {graph} and heuristics = {heuristic}"
 system_template_directions_output = "Return the route from Start room to Goal room. Use A* search on the graph and heuristics provided. Only return the names of the rooms you pass through as a python list. If you receive a goal room that is not in the list, do not perform the search and say only: 'That room is unknown'." 
     
@@ -43,14 +43,17 @@ directions_data = {
     }
 
 # Function to find the route
-def process_command_route(command):
-    response = chain_directions.invoke({"text": command})
+async def process_command_route():
+    response = await Layout.a_star_search(Layout.graph, directions_data["start_room"], directions_data["goal_room"], Layout.h)
+    print("Route found to be: ", response)
     return response
 
 # Function to find the destination
 def process_command_destination(command):
-    response = chain_destination.invoke({"text": command})
-    print("Destinaion is: ", response)
+    # Add the list of possible rooms to the command
+    updated_command = command + " The list of available rooms/utilities is: " + str(Layout.h)
+    print("Updated command is: ", updated_command)
+    response = chain_destination.invoke({"text": updated_command})
     
     # Check if we have a valid room
     try:
@@ -62,20 +65,6 @@ def process_command_destination(command):
         # If room does not exist, set the goal room to be the start room
         directions_data["goal_room"] =  directions_data["start_room"]
         return False
-        
-def route_list_create(room_list):
-    # Extract python list from GPT text
-    match = re.search(r'(\[[^\]]*\])', room_list)
-    if match:
-        extracted_list = match.group(1)
-        try:
-            # Safely evaluate the extracted list string into a Python list
-            result = eval(extracted_list)
-            if isinstance(result, list):
-                return result
-        except Exception as e:
-            print(f"Error evaluating list: {e}")
-    return None     
 
 def directions_list_create(room_route):
     # Set the current room to be the start_room
@@ -87,11 +76,10 @@ def directions_list_create(room_route):
     
     # Look through the room route list
     for item in room_route:
-        
         # Ignore start room
         if item == directions_data["start_room"]:
             continue
-            f
+            
         # Look through the list of available rooms from the current room
         for room in Layout.graph[current_room]:
             if room[0] == item:
@@ -142,12 +130,13 @@ async def motion_control(route, distances, rooms):
         # Stop motors after move
         GPIO_Communication.motor_stop()
     
-        counter = counter + 1    
+           
         
         # Update current position
         print("Successfully moved from ", directions_data["start_room"], "to ", rooms[counter])
         print("Setting current room to", rooms[counter])
         directions_data["start_room"] = rooms[counter]
+        counter = counter + 1 
 
 # Function to action the command received from the user - command variable is the destination room        
 async def ActionCommand(command):
@@ -162,16 +151,14 @@ async def ActionCommand(command):
     print("Goal room is: ", directions_data["goal_room"])   
     
     # Get the route we'll take
-    directions = process_command_route(system_template_directions.format(**directions_data))
+    directions = await process_command_route()
     if directions == "That room is unknown.":
         print("Room not found. Please try again.")
         return
     
     # Simulate motor response    
-    route_list = route_list_create(directions)
-    print("Route is: ", route_list)
-    directions_list, distance_list = directions_list_create(route_list)
-    await motion_control(directions_list, distance_list, route_list)
+    directions_list, distance_list = directions_list_create(directions)
+    await motion_control(directions_list, distance_list, directions)
     
     # Update start room
     directions_data["start_room"] = directions_data["goal_room"]
@@ -215,10 +202,10 @@ async def process_commands(queue):
         if queue.empty() and not empty_notified:
             empty_notified = True
             print("Awaiting further instructions...\n")
-            await asyncio.sleep(10)
+            await asyncio.sleep(30)
             print("Returning to charge and awaiting further instructions.\n")
             await ActionCommand("Hall")
-            print("\nAwaiting further instructions...\n")
+            print("\nAwaiting further instructions.\n")
             
         command = await queue.get()
         empty_notified = False

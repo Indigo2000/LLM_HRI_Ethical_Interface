@@ -1,5 +1,4 @@
 import heapq
-import asyncio
 
 # Define the heuristic h(n)
 h = {
@@ -9,12 +8,9 @@ h = {
     'Dining Room': 1,
     'Kitchen': 2,
     'Utility Room': 2,
-    'Bedroom 1': 2,
-    'Bedroom 2': 2,
-    'Lounge': 1,
-    'Washing Machine': 3,
-    'Tumble Drier': 3,
-    'Ironing Board': 3
+    'Bedroom 1': 3,
+    'Bedroom 2': 3,
+    'Lounge': 1
 }
 
 # Define the graph with directions
@@ -25,16 +21,18 @@ graph = {
         ('Dining Room', 10, 'diagonally forward and right'),
         ('Bathroom', 5, 'right'),
         ('Bedroom 1', 15, 'forward'),
-        ('Bedroom 2', 15, 'forward')
+        ('Bedroom 2', 20, 'forward')
     ],
     'Study': [
         ('Hall', 5, 'right')
     ],
     'Lounge': [
-        ('Hall', 5, 'diagonally right and back')
+        ('Hall', 5, 'diagonally right and back'),
+        ('Dining Room', 5, 'right')
     ],
     'Dining Room': [
         ('Hall', 5, 'diagonally left and back'),
+        ('Lounge', 5, 'left'),
         ('Utility Room', 5, 'forward'),
         ('Kitchen', 5, 'right')
     ],
@@ -42,25 +40,7 @@ graph = {
         ('Hall', 5, 'left')
     ],
     'Utility Room': [
-        ('Dining Room', 5, 'back'),
-        ('Washing Machine', 1, 'right'),
-        ('Tumble Drier', 1, 'left'),
-        ('Ironing Board', 1, 'forward')
-    ],
-    'Washing Machine': [
-        ('Utility Room', 1, 'left'),
-        ('Tumble Drier', 2, 'left'),
-        ('Ironing Board', 2, 'diagonally forward and left')
-    ],
-    'Tumble Drier': [
-        ('Utility Room', 1, 'right'),
-        ('Washing Machine', 2, 'right'),
-        ('Ironing Board', 2, 'diagonally forward and right')
-    ],
-    'Ironing board': [
-        ('Utility Room', 1, 'back'),
-        ('Washing Machine', 2, 'diagonally back and right'),
-        ('Tumble Drier', 2, 'diagonally back and left')
+        ('Dining Room', 5, 'back')
     ],
     'Kitchen': [
         ('Dining Room', 5, 'left')
@@ -70,13 +50,13 @@ graph = {
         ('Bedroom 2', 5, 'right')
     ],
     'Bedroom 2': [
-        ('Hall', 15, 'back'),
+        ('Hall', 20, 'back'),
         ('Bedroom 1', 5, 'left')
-    ]
+    ],
 }
 
-# Implementation of A* search to return list of rooms to pass through
-async def a_star_search(graph, start, goal, h):
+
+def a_star_search(graph, start, goal, h):
     open_set = []
     heapq.heappush(open_set, (h[start], 0, start, [(start, None)]))  # (f_score, g_score, current_node, path)
 
@@ -86,7 +66,7 @@ async def a_star_search(graph, start, goal, h):
         f_score, g_score, current_node, path = heapq.heappop(open_set)
 
         if current_node == goal:
-            return path[1:]  # Exclude the initial None direction
+            return path[1:], g_score  # Exclude the initial None direction
 
         if current_node in closed_set:
             continue
@@ -98,7 +78,9 @@ async def a_star_search(graph, start, goal, h):
                 continue
             tentative_g_score = g_score + cost
             tentative_f_score = tentative_g_score + h[neighbour]
-            new_path = path + [(neighbour)]
+            new_path = path + [(neighbour, direction)]
             heapq.heappush(open_set, (tentative_f_score, tentative_g_score, neighbour, new_path))
 
-    return None
+    return None, float('inf')
+
+

@@ -3,7 +3,7 @@ import base64
 import json
 import os
 import openai
-import Layout
+import LayoutOld
 from PIL import Image
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -66,7 +66,8 @@ while quit == False:
     goal_room=process_command(user_input)
     if goal_room == 'quit':
         break;
-    path, total_cost = Layout.a_star_search(Layout.graph, start_room, goal_room, Layout.h)
+    path, total_cost = LayoutOld.a_star_search(LayoutOld.graph, start_room, goal_room, LayoutOld.h)
+    print(path)
     if path:
         print(f"Path from {start_room} to {goal_room}:")
         for room, direction in path:
