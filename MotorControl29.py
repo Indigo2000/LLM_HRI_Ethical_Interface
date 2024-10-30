@@ -201,7 +201,7 @@ async def process_commands(queue):
         if queue.empty() and not empty_notified:
             empty_notified = True
             print("Awaiting further instructions...\n")
-            await asyncio.sleep(30)
+            await asyncio.sleep(60)
             print("Returning to charge and awaiting further instructions.\n")
             await ActionCommand("Hall")
             print("\nAwaiting further instructions.\n")

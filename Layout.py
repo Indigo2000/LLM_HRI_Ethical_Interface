@@ -57,7 +57,7 @@ graph = {
         ('Washing Machine', 2, 'right'),
         ('Ironing Board', 2, 'diagonally forward and right')
     ],
-    'Ironing board': [
+    'Ironing Board': [
         ('Utility Room', 1, 'back'),
         ('Washing Machine', 2, 'diagonally back and right'),
         ('Tumble Drier', 2, 'diagonally back and left')
