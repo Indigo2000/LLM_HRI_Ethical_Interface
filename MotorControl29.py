@@ -13,6 +13,8 @@ import asyncio
 from collections import deque
 import tkinter as tk
 import Config
+import time
+import math
 
 # Set the initial start and end positions
 start_room = 'Hall'
@@ -196,16 +198,27 @@ async def process_commands(queue):
     global global_quit
     # Notification of queue being empty set to true initially because we do not need to notify on program launch
     empty_notified = True
+    # Robot waiting time set to value above 60 initially to indicate it is already at charging station
+    start_time = 61
+    waiting = 60
     while global_quit == False:
-        # Retrieve the next command from the queue
+        
+        # Check to see if the queue is empty and move the robot back to charge after 1 minute
         if queue.empty() and not empty_notified:
             empty_notified = True
             print("Awaiting further instructions...\n")
-            await asyncio.sleep(60)
-            print("Returning to charge and awaiting further instructions.\n")
-            await ActionCommand("Hall")
-            print("\nAwaiting further instructions.\n")
-            
+            start_time = math.trunc(time.time())
+            continue
+        if queue.empty() and empty_notified:
+            if math.trunc(time.time()) - start_time < waiting:
+                continue
+            elif math.trunc(time.time()) - start_time == waiting:
+                print("Returning to charge and awaiting further instructions.\n")
+                await ActionCommand("Hall")
+                print("\nAwaiting further instructions.\n")
+                continue
+                
+        # Retrieve the next command from the queue
         command = await queue.get()
         empty_notified = False
         if command.lower() == 'quit':
