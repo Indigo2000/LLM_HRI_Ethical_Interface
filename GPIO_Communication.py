@@ -29,24 +29,6 @@ async def motor_left(duration):
 async def motor_right(duration):
     motor_lr.backward()
     await asyncio.sleep(duration)
-    
-#try:
-#    while True:
-#        command = input("Enter command: ")
-#        if command == "forward":
-#            motor_forward(1)
-#        elif command == "backward":
-#            motor_backward(1)
-#        elif command == "right":
-#            motor_right(1)
-#        elif command == "left":
-#            motor_left(1)
-#        elif command == "stop":
-#            motor_stop()
-#        else:
-#            print("Unknown command")
-#except KeyboardInterrupt:
-#    print("Exiting program")
 
 #Turn off any running motors
 motor_stop

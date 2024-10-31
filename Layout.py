@@ -3,23 +3,25 @@ import asyncio
 
 # Define the heuristic h(n)
 h = {
-    'Hall': 0,
-    'Study': 1,
-    'Bathroom': 1,
-    'Dining Room': 1,
-    'Kitchen': 2,
-    'Utility Room': 2,
-    'Bedroom 1': 2,
-    'Bedroom 2': 2,
-    'Lounge': 1,
-    'Washing Machine': 3,
-    'Tumble Drier': 3,
-    'Ironing Board': 3
+    'Charging Station': 0,
+    'Hall': 1,
+    'Study': 2,
+    'Bathroom': 2,
+    'Dining Room': 2,
+    'Kitchen': 3,
+    'Utility Room': 3,
+    'Bedroom 1': 3,
+    'Bedroom 2': 3,
+    'Lounge': 2,
+    'Washing Machine': 4,
+    'Tumble Drier': 4,
+    'Ironing Board': 4
 }
 
 # Define the graph with directions
 graph = {
     'Hall': [
+        ('Charging Station', 1, 'diagonally back and right'),
         ('Study', 5, 'left'),
         ('Lounge', 10, 'diagonally forward and left'),
         ('Dining Room', 10, 'diagonally forward and right'),
@@ -27,11 +29,14 @@ graph = {
         ('Bedroom 1', 15, 'forward'),
         ('Bedroom 2', 15, 'forward')
     ],
+    'Charging Station': [
+    ('Hall', 1, 'diagonally forward and left')
+    ],
     'Study': [
         ('Hall', 5, 'right')
     ],
     'Lounge': [
-        ('Hall', 5, 'diagonally right and back')
+        ('Hall', 5, 'diagonally back and right')
     ],
     'Dining Room': [
         ('Hall', 5, 'diagonally left and back'),
