@@ -1,16 +1,8 @@
 import EthicalControl
-import openai
 import Layout
-import re
-import json
-import os
 import GPIO_Communication
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 import asyncio
-from collections import deque
 import tkinter as tk
 import Config
 import time

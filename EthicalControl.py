@@ -1,10 +1,4 @@
-import openai
-import GPIO_Communication
-from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
-import asyncio
 import Config
 
 # Prompt template

@@ -1,6 +1,5 @@
 from gpiozero import Motor, Device
 from gpiozero.pins.pigpio import PiGPIOFactory
-from time import sleep
 import asyncio
 
 Device.pin_factory = PiGPIOFactory()
