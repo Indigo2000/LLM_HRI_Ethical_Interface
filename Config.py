@@ -1,9 +1,9 @@
 import sys
 import os
 # Make sure to look in the local path for the libraries
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
 import json
 from langchain_openai import ChatOpenAI
