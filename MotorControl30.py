@@ -1,10 +1,10 @@
+import Config
 import EthicalControl
 import Layout
 import GPIO_Communication
 from langchain_core.prompts import ChatPromptTemplate
 import asyncio
 import tkinter as tk
-import Config
 import time
 import math
 
