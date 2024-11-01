@@ -1,13 +1,17 @@
 import Config
+import asyncio
 import EthicalControl
 import Layout
 import GPIO_Communication
 from langchain_core.prompts import ChatPromptTemplate
-import asyncio
 import tkinter as tk
 import time
 import math
-###############################################This is a test
+import sys
+
+if 'ipykernel' in sys.modules:
+    import nest_asyncio
+    nest_asyncio.apply()
 
 # Set the initial start and end positions
 start_location = 'Charging Station'
