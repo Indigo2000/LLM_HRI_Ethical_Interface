@@ -5,6 +5,10 @@ import os
 #sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
 #sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
+# Setup global quit variable
+global_quit = False
+global_stop = False
+
 import json
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser

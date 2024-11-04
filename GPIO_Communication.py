@@ -1,11 +1,12 @@
 try:
-    from gpiozero import Motor, Device
+    from gpiozero import Button, Motor, Device
     from gpiozero.pins.pigpio import PiGPIOFactory
     motors = True
 except ModuleNotFoundError:
     print("gpiozero module not found - motor action will not be simulated")
     motors = False
 
+import Config
 import asyncio
 
 if motors:
@@ -15,6 +16,7 @@ if motors:
 # GPIO setup
     motor_fb = Motor(forward=12, backward=13)
     motor_lr = Motor(forward=18, backward=19)
+    stop_switch = Button(17)
 
 # Motor control functions
 def motor_stop():
@@ -42,7 +44,24 @@ async def motor_right(duration):
         motor_lr.backward()
     await asyncio.sleep(duration)
 
-#Turn off any running motors
+async def emergency_stop():
+    if motors:
+        loop = asyncio.get_event_loop()
+        future = loop.create_future()
+        
+        def on_button_pressed():
+            if not future.done():
+                future.set_result(True)
+        
+        stop_switch.when_pressed = on_button_pressed
+        
+        await future
+        print("Emergency Stop!")
+        motor_stop()
+           
+
+
+#Turn off any running motors on initial startup
 if motors:
     motor_stop
     
