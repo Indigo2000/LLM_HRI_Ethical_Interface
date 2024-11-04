@@ -1,3 +1,5 @@
+motors = False
+
 try:
     from gpiozero import Button, Motor, Device
     from gpiozero.pins.pigpio import PiGPIOFactory
@@ -8,12 +10,13 @@ except ModuleNotFoundError:
 
 import Config
 import asyncio
+import EthicalControl
 
 if motors:
 
     Device.pin_factory = PiGPIOFactory()
 
-# GPIO setup
+    # GPIO setup
     motor_fb = Motor(forward=12, backward=13)
     motor_lr = Motor(forward=18, backward=19)
     stop_switch = Button(17)
@@ -44,7 +47,7 @@ async def motor_right(duration):
         motor_lr.backward()
     await asyncio.sleep(duration)
 
-async def emergency_stop():
+async def emergency_stop(queue):
     if motors:
         loop = asyncio.get_event_loop()
         future = loop.create_future()
@@ -58,6 +61,7 @@ async def emergency_stop():
         await future
         print("Emergency Stop!")
         motor_stop()
+        EthicalControl.purge_queue(queue)
            
 
 
