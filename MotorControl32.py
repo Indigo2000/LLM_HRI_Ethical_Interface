@@ -126,6 +126,9 @@ async def motion_control(route, distances, locations):
             
         # Stop motors after move
         GPIO_Communication.motor_stop()
+        
+        if Config.global_stop == True:
+            break
     
            
         
@@ -200,7 +203,7 @@ async def process_commands(queue):
     # Robot waiting time set to value above 60 initially to indicate it is already at charging station
     start_time = 61
     waiting = 60
-    while Config.global_quit == False:
+    while Config.global_quit == False and Config.global_stop == False:
         # Check to see if the queue is empty and move the robot back to charge after 1 minute
         if queue.empty() and not empty_notified:
             empty_notified = True
@@ -238,8 +241,11 @@ class GUIApp():
         self.root = root
         self.root.geometry("600x100")
         self.root.title("Command input")
+        
+        # Command input cell
         self.entry = tk.Entry(self.root, width=40)
         self.entry.pack()
+        self.entry.focus_set()
         
         # Setup for user to be able to hit enter or press submit button
         self.entry.bind("<Return>", self.on_enter)
@@ -294,6 +300,7 @@ async def main():
     
     # Set up the GUI
     root = tk.Tk()
+    root.attributes('-topmost', 1)
     gui_app = GUIApp(queue, root)
     
     # Run the asyncio event loop with the Tkinter main loop

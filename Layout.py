@@ -38,7 +38,7 @@ graph = {
         ('Hall', 5, 'diagonally back and right')
     ],
     'Dining Room': [
-        ('Hall', 5, 'diagonally left and back'),
+        ('Hall', 5, 'diagonally back and left'),
         ('Utility Room', 5, 'forward'),
         ('Kitchen', 5, 'right')
     ],

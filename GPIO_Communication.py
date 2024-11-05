@@ -61,7 +61,9 @@ async def emergency_stop(queue):
         await future
         print("Emergency Stop!")
         motor_stop()
-        EthicalControl.purge_queue(queue)
+        Config.global_stop = True
+        await EthicalControl.purge_queue(queue)
+        await asyncio.sleep(5)
            
 
 
