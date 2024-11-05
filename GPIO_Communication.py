@@ -1,5 +1,7 @@
+# Variable to indicate if motors are connected through raspberry Pi
 motors = False
 
+# Try to import I/O module for raspberry Pi
 try:
     from gpiozero import Button, Motor, Device
     from gpiozero.pins.pigpio import PiGPIOFactory
@@ -12,8 +14,9 @@ import Config
 import asyncio
 import EthicalControl
 
+# I motors connected, set them up along with the emergency stop physical button
 if motors:
-
+    # Set u the pins
     Device.pin_factory = PiGPIOFactory()
 
     # GPIO setup
@@ -46,7 +49,8 @@ async def motor_right(duration):
     if motors:
         motor_lr.backward()
     await asyncio.sleep(duration)
-
+    
+# Emergency stop function - checks for button push and stops the motors/clears the queue if it is
 async def emergency_stop(queue):
     if motors:
         loop = asyncio.get_event_loop()

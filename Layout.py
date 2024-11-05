@@ -1,6 +1,6 @@
 import heapq
 
-# Define the heuristic h(n)
+# Define locations heuristic h(n)
 h = {
     'Charging Station': 0,
     'Hall': 1,
