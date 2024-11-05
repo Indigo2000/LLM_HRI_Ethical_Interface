@@ -167,8 +167,8 @@ async def ActionCommand(command):
 # Function to get input from the user
 async def input_loop(queue, gui_app):
     
-    while Config.global_quit == False
-    :
+    while Config.global_quit == False:
+
         # Get user input without blocking the event loop
         user_input = await gui_app.get_input()
         
