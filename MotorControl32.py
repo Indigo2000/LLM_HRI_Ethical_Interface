@@ -262,6 +262,7 @@ class GUIApp():
     
     async def emergency_stop(self):
         GPIO_Communication.motor_stop()
+        print("Emergency stop!")
         await EthicalControl.purge_queue(self.queue)
         Config.global_stop = True
 
