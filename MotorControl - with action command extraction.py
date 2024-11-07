@@ -17,25 +17,25 @@ if 'ipykernel' in sys.modules:
     nest_asyncio.apply()
     
 # To print stdout to file, remove the '#' on the next two lines and also from the last two lines of the file
-#log_file = open("output.log", "w")
-#sys.stdout = log_file
+log_file = open("output.log", "w")
+sys.stdout = log_file
     
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(message)s')
+#logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 # Create a logger
-logger = logging.getLogger()
+#logger = logging.getLogger()
 
 # Add a handler to log to a file
-file_handler = logging.FileHandler("output.log")
-logger.addHandler(file_handler)
+#file_handler = logging.FileHandler("output.log")
+#logger.addHandler(file_handler)
 
 # Add a handler to log to the terminal (stdout)
-console_handler = logging.StreamHandler(sys.stdout)
-logger.addHandler(console_handler)
+#console_handler = logging.StreamHandler(sys.stdout)
+#logger.addHandler(console_handler)
 
 # Redirect print to use logger
-print = logger.info
+#print = logger.info
 
 
 # Set the initial start, end and action positions
@@ -168,7 +168,7 @@ async def motion_control(route, distances, locations):
             break           
         
         # Update current position
-        print("Successfully moved from %s", directions_data["start_location"], "to %s", locations[counter])
+        print(f"Successfully moved from {directions_data['start_location']} to {locations[counter]}")
         print("Setting current location to %s", locations[counter])
         directions_data["start_location"] = locations[counter]
         counter = counter + 1 
@@ -386,5 +386,5 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 
-#sys.stdout=sys.__stdout__
-#log_file.close()
+sys.stdout=sys.__stdout__
+log_file.close()
