@@ -18,21 +18,14 @@ if 'ipykernel' in sys.modules:
 start_location = 'Charging Station'
 goal_location = 'Hall'
 
-# Prompt templates
+# Prompt template
 system_template_destination = "Find the destination room/utility from this instruction and return its name. Your options are limited to the names contained in the list provided. If you cannot find the correct room/utility in the list, say only: 'That location is unknown'."
-system_template_directions = "Start location = {start_location} Goal location = {goal_location} Graph = {graph} and heuristics = {heuristic}"
-system_template_directions_output = "Return the route from Start location to Goal location. Use A* search on the graph and heuristics provided. Only return the names of the locations you pass through as a python list. If you receive a goal location that is not in the list, do not perform the search and say only: 'That location is unknown'." 
     
-# Define the prompts
+# Define the prompt
 prompt_template_destination = ChatPromptTemplate.from_messages([("system", system_template_destination), ("user", "{text}")])
-prompt_template_directions = ChatPromptTemplate.from_messages([("system", system_template_directions_output), ("user", "{text}")])
 
-# Define the chains
+# Define the chain
 chain_destination = prompt_template_destination | Config.model | Config.parser
-chain_directions = prompt_template_directions | Config.model | Config.parser
-
-# Setup global quit variable
-global_quit = False
 
 # Define the data for directions
 directions_data = {
@@ -112,6 +105,7 @@ async def motion_control(route, distances, locations):
             await asyncio.gather(GPIO_Communication.motor_right(distances[counter]))
             
         elif item == "diagonally forward and left":
+            print("sending command")
             await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]), GPIO_Communication.motor_left(distances[counter]))
         
         elif item == "diagonally forward and right":
@@ -128,8 +122,10 @@ async def motion_control(route, distances, locations):
             
         # Stop motors after move
         GPIO_Communication.motor_stop()
-    
-           
+        
+        # Quit this loop if the stop command has been given. Do not do the next move.
+        if Config.global_stop == True:
+            break           
         
         # Update current position
         print("Successfully moved from ", directions_data["start_location"], "to ", locations[counter])
@@ -144,7 +140,8 @@ async def ActionCommand(command):
     if not process_command_destination(command.title()):
         # Return if goal location invalid
         return
-        
+    
+    # If already at goal location, no need to move    
     if directions_data["start_location"] == directions_data["goal_location"]:
         print("Already at location", directions_data["goal_location"])
         return
@@ -165,35 +162,31 @@ async def ActionCommand(command):
     
     # Update start location
     directions_data["start_location"] = directions_data["goal_location"]
-    
+
+ 
+# Function to get input from the user
 async def input_loop(queue, gui_app):
-    global global_quit
     
-    while global_quit == False:
+    while Config.global_quit == False:
         # Get user input without blocking the event loop
         user_input = await gui_app.get_input()
         
         # Check user is authorised to give command
         await SecurityCheck.check_security()
         
+        # If user has typed quit, stop the motors and quit the program
         if user_input.lower() == 'quit':
-            # If user has typed quit, stop the motors and quit the program
             GPIO_Communication.motor_stop()
-            global_quit = True
+            Config.global_quit = True
             break
-        if user_input.lower() == 'stop':
-            # Stop the motors
+        
+        # If user has typed stop, stop the motors and clear queue    
+        if user_input.lower() == 'stop':            
             GPIO_Communication.motor_stop()
                         
             # Purge queue
-            while not queue.empty():
-                await queue.get()
-                queue.task_done()
-            # Inform user
-            print("\nStop command received. Current task aborted and all future tasks cancelled.")
+            await EthicalControl.purge_queue(queue)
             break;
-            
-            
             
         # Check command for ethical issues. If issue found, restart loop. Otherwise, add the command to the loop
         if await EthicalControl.check_ethics(user_input):
@@ -201,15 +194,19 @@ async def input_loop(queue, gui_app):
         else:
             await queue.put(user_input)
 
+# Function to process the commands in the queue
 async def process_commands(queue):
-    global global_quit
+    
     # Notification of queue being empty set to true initially because we do not need to notify on program launch
     empty_notified = True
+    
     # Robot waiting time set to value above 60 initially to indicate it is already at charging station
     start_time = 61
+    # Amount of time robot will wait for before returning to charge (in seconds)
     waiting = 60
-    while global_quit == False:
-        # Check to see if the queue is empty and move the robot back to charge after 1 minute
+    while Config.global_quit == False and Config.global_stop == False:
+        
+        # Checks to see if the queue is empty and if a notification has been given. Move the robot back to charge if queue is empty and it's not on charge already.
         if queue.empty() and not empty_notified:
             empty_notified = True
             print("Awaiting further instructions...\n")
@@ -238,28 +235,50 @@ async def process_commands(queue):
         queue.task_done()
 
 class GUIApp():
-    def __init__(self, root):
+    def __init__(self, queue, root):
+        
+        self.queue = queue
+        
         # Create the command input window
         self.root = root
-        self.root.geometry("600x60")
+        self.root.geometry("600x100")
         self.root.title("Command input")
+        
+        # Command input cell
         self.entry = tk.Entry(self.root, width=40)
         self.entry.pack()
+        self.entry.focus_set()
         
-        # Allow user to hit enter or press submit button
+        # Setup for user to be able to hit enter or press submit button
         self.entry.bind("<Return>", self.on_enter)
-        self.button = tk.Button(self.root, text="Submit", command=self.submit_input)
-        self.button.pack()
+        self.submit_button = tk.Button(self.root, text="Submit", command=self.submit_input)
+        self.submit_button.pack()
+        
+        # Setup for user to be able to hit emergency stop button
+        self.stop_button = tk.Button(self.root, text="Emergency Stop!", command=self.run_emergency_stop)
+        self.stop_button.pack()
         self.input_future = None
-
+        
+    # non async function to trigger emergency stop from button push    
+    def run_emergency_stop(self):
+        asyncio.create_task(self.emergency_stop())
+    
+    # Function to perform Emergency stop and clear the queue
+    async def emergency_stop(self):
+        GPIO_Communication.motor_stop()
+        print("Emergency stop!")
+        await EthicalControl.purge_queue(self.queue)
+        Config.global_stop = True
+    
+    #Function to send the input from the user
     def submit_input(self):
         # When the button is clicked (or enter key hit), set the result of the future to the user input
         if self.input_future:
             self.input_future.set_result(self.entry.get())
             # Clear the text from the field
             self.entry.delete(0, tk.END)
-        
 
+    #Function to get the input from the user
     async def get_input(self):
         # Create a new future and wait for input from the GUI
         self.input_future = asyncio.get_event_loop().create_future()
@@ -267,48 +286,62 @@ class GUIApp():
         print("\nCommand received: ", text, "\n")
         return text
     
+    # Function to submit user input when 'enter' is pressed.
     def on_enter(self, event):
         self.submit_input()
 
-# Refresh the window periodically
+# Function to refresh the window periodically
 async def update_tk(root):
-    global global_quit
-    while global_quit == False:
+    
+    while Config.global_quit == False and Config.global_stop == False:
         # Try to update the window, if not possible (i.e. window closed), stop the motors and terminate the whole program
         try:
             root.update()
         except:
             GPIO_Communication.motor_stop()
-            global_quit = True
+            Config.global_quit = True
         await asyncio.sleep(0.01)
 
+# Main function
 async def main():
+    # Set up the command queue
+    queue = asyncio.Queue()    
     
     # Set up the GUI
     root = tk.Tk()
-    gui_app = GUIApp(root)
-    
-    # Set up the command queue
-    queue = asyncio.Queue()
+    root.attributes('-topmost', 1)
+    gui_app = GUIApp(queue, root)
     
     # Run the asyncio event loop with the Tkinter main loop
     loop = asyncio.get_event_loop()
     
-    while global_quit == False:
+    while Config.global_quit == False:
+        # Set up main concurrent tasks
         producer = asyncio.create_task(input_loop(queue, gui_app))
         consumer = asyncio.create_task(process_commands(queue))
         gui_refresh = asyncio.create_task(update_tk(root))
-        # Look out for producer to send stop command so we can cancel the consumer tasks
-        done, pending = await asyncio.wait([producer, consumer, gui_refresh], return_when=asyncio.FIRST_COMPLETED)        
+        ongoing_ethics = asyncio.create_task(EthicalControl.ethical_triggers(queue))
+        
+        # Look out for producer, gui_refresh or ongoing_ethics to complete so we can cancel the other tasks
+        done, pending = await asyncio.wait([producer, consumer, gui_refresh, ongoing_ethics], return_when=asyncio.FIRST_COMPLETED)
+        # Cancel other tasks if ine ends
         if producer in done:
             consumer.cancel()
+            gui_refresh.cancel()
+            ongoing_ethics.cancel()
+        elif ongoing_ethics in done:
+            producer.cancel()
+            consumer.cancel()
+            gui_refresh.cancel()
+        elif gui_refresh in done:
+            producer.cancel()
+            consumer.cancel()
+            ongoing_ethics.cancel()
+            
+        # Reset global_stop command
+        Config.global_stop = False
+            
 
 if __name__ == "__main__":
     asyncio.run(main())
-        
-        
 
-    
-
-
-asyncio.run(main())
