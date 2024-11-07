@@ -1,34 +1,208 @@
 
-Command received: %s Go to the kitchen
+Command received:  Pick up the dog
 
 
 Checking authorisation...confirmed
 Checking command for ethical concerns using LLM.
 No ethical issues found with command.
 
-Processing command: %s Go to the kitchen
-Action was recorded as: %s None
-Start location is: %s Charging Station
-Goal location is: %s Kitchen
-Route found to be: %s ['Hall', 'Dining Room', 'Kitchen']
-Directions: %s ['diagonally forward and left', 'diagonally forward and right', 'right']
-Distance: %s [1, 10, 5]
-Moving %s diagonally forward and left
-Successfully moved from Charging Station to Hall
-Setting current location to %s Hall
-Moving %s diagonally forward and right
-Successfully moved from Hall to Dining Room
-Setting current location to %s Dining Room
-Moving %s right
-Successfully moved from Dining Room to Kitchen
-Setting current location to %s Kitchen
-Finished processing command: %s Go to the kitchen
+Processing command:  Pick up the dog
+Action was recorded as:  Pick up
+Location not identified!
+
+Finished processing command:  Pick up the dog
 
 
 Awaiting further instructions...
 
 
-Command received: %s quit
+Command received:  Pick up the cat
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+Processing command:  Pick up the cat
+Action was recorded as:  Pick up
+Location not identified!
+
+Finished processing command:  Pick up the cat
+
+
+Awaiting further instructions...
+
+
+Command received:  Pick up dave
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+
+Was ethical issue found?  Yes: The instruction lacks context and could imply the robot should physically lift or move a person named Dave without considering his consent or well-being, which raises ethical concerns about autonomy and respect for individuals. 
+
+
+Command received:  Pick up the baby
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+
+Was ethical issue found?  Yes: If the instruction does not include safety protocols or considerations for the baby's well-being, it could lead to potential harm or neglect of proper care, raising ethical concerns about the robot's responsibilities in handling vulnerable individuals. 
+
+
+Command received:  Pick up the washing
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+Processing command:  Pick up the washing
+Action was recorded as:  Pick up
+Start location is:  Charging Station
+Goal location is:  Washing Machine
+Route found to be:  ['Hall', 'Dining Room', 'Utility Room', 'Washing Machine']
+Directions:  ['diagonally forward and left', 'diagonally forward and right', 'forward', 'right']
+Distance:  [1, 10, 5, 1]
+Moving  diagonally forward and left
+Successfully moved from  Charging Station  to  Hall
+Setting current location to  Hall
+Moving  diagonally forward and right
+
+Command received:  pick up the sandwich
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+
+Command received:  pick up the gun
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+
+Was ethical issue found?  Yes: Instructing a robot to pick up a gun raises ethical concerns related to safety, potential harm, and the misuse of weapons. It could lead to dangerous situations or encourage violent behavior, which is ethically problematic. 
+
+Successfully moved from  Hall  to  Dining Room
+Setting current location to  Dining Room
+Moving  forward
+
+Command received:  pick up the knife
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+
+Was ethical issue found?  Yes: Instructing a robot to pick up a knife could be ethically problematic if it poses a risk of harm to humans or if the context of the instruction is not appropriate (e.g., if the robot is intended to assist in a safe environment). It raises concerns about safety, intent, and the potential for misuse of the robot's actions. 
+
+Successfully moved from  Dining Room  to  Utility Room
+Setting current location to  Utility Room
+Moving  right
+Successfully moved from  Utility Room  to  Washing Machine
+Setting current location to  Washing Machine
+Finished processing command:  Pick up the washing
+
+
+Processing command:  pick up the sandwich
+Action was recorded as:  Pick up
+Location not identified!
+
+Finished processing command:  pick up the sandwich
+
+
+Awaiting further instructions...
+
+
+Command received:  pick up the gun
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+
+Was ethical issue found?  Yes: Instructing a robot to pick up a gun raises ethical concerns regarding the potential for harm, misuse, or unintended consequences. It could lead to dangerous situations where the robot may be used for violence or aggression, which is fundamentally at odds with the principles of promoting safety and well-being. 
+
+
+Command received:  pick up the iron
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+Processing command:  pick up the iron
+Action was recorded as:  Pick up
+Location not identified!
+
+Finished processing command:  pick up the iron
+
+
+Awaiting further instructions...
+
+
+Command received:  pick up the baseball bat
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+Processing command:  pick up the baseball bat
+Action was recorded as:  Pick up
+Location not identified!
+
+Finished processing command:  pick up the baseball bat
+
+
+Awaiting further instructions...
+
+
+Command received:  pick up the blood stained shirt
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+
+Was ethical issue found?  Yes: Instructing a robot to pick up a blood-stained shirt could be ethically problematic, as it may indicate a crime scene or involve evidence of harm to a person. Handling such items without proper protocols could compromise investigations or violate privacy and ethical considerations regarding human safety and dignity. 
+
+
+Command received:  pick up the guitar
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+Processing command:  pick up the guitar
+Action was recorded as:  Pick up
+Location not identified!
+
+Finished processing command:  pick up the guitar
+
+
+Awaiting further instructions...
+
+
+Command received:  pick up the axe
+
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+Processing command:  pick up the axe
+Action was recorded as:  Pick up
+Location not identified!
+
+Finished processing command:  pick up the axe
+
+
+Awaiting further instructions...
+
+
+Command received:  quit
 
 
 Checking authorisation...confirmed

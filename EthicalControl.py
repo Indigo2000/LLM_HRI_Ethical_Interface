@@ -27,13 +27,13 @@ async def check_ethics(command):
     response = await process_ethics(command)
 
     if "Yes" in response:
-        print("\nWas ethical issue found? %s", response, "\n")
+        print("\nWas ethical issue found? ", response, "\n")
         return True
     elif "No" in response:
         print("No ethical issues found with command.\n")
         return False
     else:
-        print("Error checking command for ethical concerns. Please try again. Response from LLM was: %s", response, "\n")
+        print("Error checking command for ethical concerns. Please try again. Response from LLM was: ", response, "\n")
         return True
 
 
