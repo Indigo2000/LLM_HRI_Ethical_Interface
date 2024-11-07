@@ -105,7 +105,6 @@ async def motion_control(route, distances, locations):
             await asyncio.gather(GPIO_Communication.motor_right(distances[counter]))
             
         elif item == "diagonally forward and left":
-            print("sending command")
             await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]), GPIO_Communication.motor_left(distances[counter]))
         
         elif item == "diagonally forward and right":
