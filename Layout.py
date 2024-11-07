@@ -79,6 +79,19 @@ graph = {
     ],
 }
 
+# Define actions
+actions = {
+    'Pick up',
+    'Put down',
+    'Put in',
+    'Take out',
+    'Iron',
+    'Fold',
+    'Put away',
+    'Hang up',
+    'Switch on'
+}
+
 # Implementation of A* search to return list of rooms to pass through
 async def a_star_search(graph, start, goal, h):
     open_set = []

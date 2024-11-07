@@ -14,12 +14,13 @@ if 'ipykernel' in sys.modules:
     import nest_asyncio
     nest_asyncio.apply()
 
-# Set the initial start and end positions
+# Set the initial start, end and action positions
 start_location = 'Charging Station'
-goal_location = 'Hall'
+goal_location = 'Charging Station'
+action_command = 'None'
 
 # Prompt template
-system_template_destination = "Find the destination room/utility from this instruction and return its name. Your options are limited to the names contained in the list provided. If you cannot find the correct room/utility in the list, say only: 'That location is unknown'."
+system_template_destination = "You are presented with an instruction destined for a robot. You need to return a destination location/utility, an action, or both. The format of your response should be given as \"Destination: ..., Action:...\" where \"...\" is replaced by the desired destination and action. If no destination or action is found in the command, replace \"...\" with \"None\". Your responses are limited to the locations and actioins in the lists provided."
     
 # Define the prompt
 prompt_template_destination = ChatPromptTemplate.from_messages([("system", system_template_destination), ("user", "{text}")])
@@ -32,7 +33,8 @@ directions_data = {
     "start_location": start_location,
     "goal_location": goal_location,
     "graph": Layout.graph,
-    "heuristic": Layout.h
+    "heuristic": Layout.h,
+    "action": action_command
     }
 
 # Function to find the route
@@ -41,23 +43,38 @@ async def process_command_route():
     print("Route found to be: ", response)
     return response
 
-# Function to find the destination
-def process_command_destination(command):
-    # Add the list of possible locations to the command
-    updated_command = command + " The list containing available locations/utilities is: " + str(Layout.h)
+# Function to find the destination and action
+def process_loc_act(command):
+    # Add the list of possible locations and actions to the command
+    updated_command = command + " The list containing available locations/utilities is: " + str(Layout.h) + " The list containing available actions is: " + str(Layout.actions)
+    
+    # Invoke the LLM to generate the response
     response = chain_destination.invoke({"text": updated_command})
+    
+    # Extract the location from the response
+    destination_start = response.find(":") + 2
+    destination_end = response.find(",")    
+    destination = response[destination_start:destination_end].strip()
+    
+    # Extract the action from the command
+    action_start = response.find(":", destination_end + 1) + 2
+    action = response[action_start:]
+    
+    print("Action was recorded as: ", action)
     
     # Check if we have a valid location
     try:
-        location = Layout.h[response]
-        directions_data["goal_location"] = response
+        location = Layout.h[destination]
+        directions_data["goal_location"] = destination
+        directions_data["action"] = action
         return True
     except:
-        print("No such location!\n")
+        print("Location not identified!\n")
         # If location does not exist, set the goal location to be the start location
         directions_data["goal_location"] =  directions_data["start_location"]
         return False
 
+# Function to create lists of directions and distances
 def directions_list_create(location_route):
     # Set the current location to be the start_location
     current_location = directions_data["start_location"]
@@ -83,7 +100,7 @@ def directions_list_create(location_route):
     print("Distance: ", distance_list)
     return directions_list, distance_list
     
-# Function to control the motor
+# Function to control the motor towards its destination
 async def motion_control(route, distances, locations):
     
     # Counter for moving through the route
@@ -105,7 +122,6 @@ async def motion_control(route, distances, locations):
             await asyncio.gather(GPIO_Communication.motor_right(distances[counter]))
             
         elif item == "diagonally forward and left":
-            print("sending command")
             await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]), GPIO_Communication.motor_left(distances[counter]))
         
         elif item == "diagonally forward and right":
@@ -133,11 +149,11 @@ async def motion_control(route, distances, locations):
         directions_data["start_location"] = locations[counter]
         counter = counter + 1 
 
-# Function to action the command received from the user - command variable is the destination location        
+# Function to action the command received from the user        
 async def ActionCommand(command):
         
-    # Update goal_location    
-    if not process_command_destination(command.title()):
+    # Update goal_location and action    
+    if not process_loc_act(command.title()):
         # Return if goal location invalid
         return
     
