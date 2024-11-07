@@ -1,0 +1,84 @@
+
+Command received:  Go to the kitchen 
+
+Checking authorisation...confirmed
+Checking command for ethical concerns using LLM.
+No ethical issues found with command.
+
+Processing command:  Go to the kitchen
+Action was recorded as:  None
+Start location is:  Charging Station
+Goal location is:  Kitchen
+Route found to be:  ['Hall', 'Dining Room', 'Kitchen']
+Directions:  ['diagonally forward and left', 'diagonally forward and right', 'right']
+Distance:  [1, 10, 5]
+Moving diagonally forward and left
+Successfully moved from  Charging Station to  Hall
+Setting current location to Hall
+Moving diagonally forward and right
+Successfully moved from  Hall to  Dining Room
+Setting current location to Dining Room
+Moving right
+Successfully moved from  Dining Room to  Kitchen
+Setting current location to Kitchen
+Finished processing command:  Go to the kitchen
+
+
+Awaiting further instructions...
+
+
+Command received:  quit 
+
+Checking authorisation...confirmed
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+
+Awaiting further instructions...
+
+Returning to charge and awaiting further instructions.
+
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+
+Awaiting further instructions.
+
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Processing command: Go to the kitchen
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Action was recorded as: None
+Start location is: Charging Station
+Goal location is: Kitchen
+Route found to be: ['Hall', 'Dining Room', 'Kitchen']
+Directions: ['diagonally forward and left', 'diagonally forward and right', 'right']
+Distance: [1, 10, 5]
+Moving diagonally forward and left
+Setting current location to Hall
+Moving diagonally forward and right
+Setting current location to Dining Room
+Moving right
+Setting current location to Kitchen
+Finished processing command: Go to the kitchen
+
+
+Awaiting further instructions...
+
+
+Command received: Go to the kitchen
+
+
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Processing command: Go to the kitchen
+HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Action was recorded as: None
+Start location is: Charging Station
+Goal location is: Kitchen
+Route found to be: ['Hall', 'Dining Room', 'Kitchen']
+Directions: ['diagonally forward and left', 'diagonally forward and right', 'right']
+Distance: [1, 10, 5]
+Moving diagonally forward and left
+Setting current location to Hall
+Moving diagonally forward and right
+Setting current location to Dining Room
+Moving right

@@ -9,10 +9,34 @@ import tkinter as tk
 import time
 import math
 import sys
+import logging
 
+# If this is running using ipykernel, import nest_asyncio and apply it
 if 'ipykernel' in sys.modules:
     import nest_asyncio
     nest_asyncio.apply()
+    
+# To print stdout to file, remove the '#' on the next two lines and also from the last two lines of the file
+#log_file = open("output.log", "w")
+#sys.stdout = log_file
+    
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+
+# Create a logger
+logger = logging.getLogger()
+
+# Add a handler to log to a file
+file_handler = logging.FileHandler("output.log")
+logger.addHandler(file_handler)
+
+# Add a handler to log to the terminal (stdout)
+console_handler = logging.StreamHandler(sys.stdout)
+logger.addHandler(console_handler)
+
+# Redirect print to use logger
+print = logger.info
+
 
 # Set the initial start, end and action positions
 start_location = 'Charging Station'
@@ -40,7 +64,7 @@ directions_data = {
 # Function to find the route
 async def process_command_route():
     response = await Layout.a_star_search(Layout.graph, directions_data["start_location"], directions_data["goal_location"], Layout.h)
-    print("Route found to be: ", response)
+    print("Route found to be: %s", response)
     return response
 
 # Function to find the destination and action
@@ -60,7 +84,7 @@ def process_loc_act(command):
     action_start = response.find(":", destination_end + 1) + 2
     action = response[action_start:]
     
-    print("Action was recorded as: ", action)
+    print("Action was recorded as: %s", action)
     
     # Check if we have a valid location
     try:
@@ -96,8 +120,8 @@ def directions_list_create(location_route):
                 distance_list.append(location[1])
         current_location = item
         
-    print("Directions: ", directions_list)
-    print("Distance: ", distance_list)
+    print("Directions: %s", directions_list)
+    print("Distance: %s", distance_list)
     return directions_list, distance_list
     
 # Function to control the motor towards its destination
@@ -108,7 +132,7 @@ async def motion_control(route, distances, locations):
     
     # 
     for item in route:
-        print("Moving", item)
+        print("Moving %s", item)
         if item == "forward":
             await asyncio.gather(GPIO_Communication.motor_forward(distances[counter]))
 
@@ -144,8 +168,8 @@ async def motion_control(route, distances, locations):
             break           
         
         # Update current position
-        print("Successfully moved from ", directions_data["start_location"], "to ", locations[counter])
-        print("Setting current location to", locations[counter])
+        print("Successfully moved from %s", directions_data["start_location"], "to %s", locations[counter])
+        print("Setting current location to %s", locations[counter])
         directions_data["start_location"] = locations[counter]
         counter = counter + 1 
 
@@ -159,12 +183,12 @@ async def ActionCommand(command):
     
     # If already at goal location, no need to move    
     if directions_data["start_location"] == directions_data["goal_location"]:
-        print("Already at location", directions_data["goal_location"])
+        print("Already at location %s", directions_data["goal_location"])
         return
         
     # State where we start and where we end    
-    print("Start location is: ", directions_data["start_location"])
-    print("Goal location is: ", directions_data["goal_location"])   
+    print("Start location is: %s", directions_data["start_location"])
+    print("Goal location is: %s", directions_data["goal_location"])   
     
     # Get the route we'll take
     directions = await process_command_route()
@@ -243,10 +267,10 @@ async def process_commands(queue):
         # Retrieve the next command from the queue
         command = await queue.get()
         empty_notified = False        
-        print("Processing command: ", command)
+        print("Processing command: %s", command)
         # Action a user command
         await ActionCommand(command)
-        print("Finished processing command: ", command)
+        print("Finished processing command: %s", command)
         print("\n")
         queue.task_done()
 
@@ -299,7 +323,8 @@ class GUIApp():
         # Create a new future and wait for input from the GUI
         self.input_future = asyncio.get_event_loop().create_future()
         text = await self.input_future
-        print("\nCommand received: ", text, "\n")
+        print("\nCommand received: %s", text)
+        print("\n")
         return text
     
     # Function to submit user input when 'enter' is pressed.
@@ -361,3 +386,5 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 
+#sys.stdout=sys.__stdout__
+#log_file.close()
