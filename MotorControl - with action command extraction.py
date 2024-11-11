@@ -17,8 +17,8 @@ if 'ipykernel' in sys.modules:
     nest_asyncio.apply()
     
 # To print stdout to file, remove the '#' on the next two lines and also from the last two lines of the file
-log_file = open("output.log", "w")
-sys.stdout = log_file
+#log_file = open("output.log", "w")
+#sys.stdout = log_file
     
 # Configure logging
 #logging.basicConfig(level=logging.INFO, format='%(message)s')
