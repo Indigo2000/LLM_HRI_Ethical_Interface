@@ -14,7 +14,7 @@ import Config
 import asyncio
 import EthicalControl
 
-# I motors connected, set them up along with the emergency stop physical button
+# If motors connected, set them up along with the emergency stop physical button
 if motors:
     # Set u the pins
     Device.pin_factory = PiGPIOFactory()
