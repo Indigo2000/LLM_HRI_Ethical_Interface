@@ -19,24 +19,6 @@ if 'ipykernel' in sys.modules:
 # To print stdout to file, remove the '#' on the next two lines and also from the last two lines of the file
 #log_file = open("output.log", "w")
 #sys.stdout = log_file
-    
-# Configure logging
-#logging.basicConfig(level=logging.INFO, format='%(message)s')
-
-# Create a logger
-#logger = logging.getLogger()
-
-# Add a handler to log to a file
-#file_handler = logging.FileHandler("output.log")
-#logger.addHandler(file_handler)
-
-# Add a handler to log to the terminal (stdout)
-#console_handler = logging.StreamHandler(sys.stdout)
-#logger.addHandler(console_handler)
-
-# Redirect print to use logger
-#print = logger.info
-
 
 # Set the initial start, end and action positions
 start_location = 'Charging Station'
@@ -44,7 +26,7 @@ goal_location = 'Charging Station'
 action_command = 'None'
 
 # Prompt template
-system_template_destination = "You are presented with an instruction destined for a robot. You need to return a destination location/utility, an action, or both. The format of your response should be given as \"Destination: ..., Action:...\" where \"...\" is replaced by the desired destination and action. If no destination or action is found in the command, replace \"...\" with \"None\". Your responses are limited to the locations and actioins in the lists provided."
+system_template_destination = "You are presented with an instruction destined for a robot. You need to return a destination location/utility, an action, or both. The format of your response should be given as \"Destination: ..., Action:...\" where \"...\" is replaced by the desired destination and action. If no destination or action is found in the command, replace \"...\" with \"None\". Your responses are limited to the locations and actions in the lists provided."
     
 # Define the prompt
 prompt_template_destination = ChatPromptTemplate.from_messages([("system", system_template_destination), ("user", "{text}")])
@@ -68,7 +50,7 @@ async def process_command_route():
     return response
 
 # Function to find the destination and action
-def process_loc_act(command):
+def interpret_command(command):
     # Add the list of possible locations and actions to the command
     updated_command = command + " The list containing available locations/utilities is: " + str(Layout.h) + " The list containing available actions is: " + str(Layout.actions)
     
@@ -177,7 +159,7 @@ async def motion_control(route, distances, locations):
 async def ActionCommand(command):
         
     # Update goal_location and action    
-    if not process_loc_act(command.title()):
+    if not interpret_command(command.title()):
         # Return if goal location invalid
         return
     
