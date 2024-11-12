@@ -4,7 +4,7 @@ import GPIO_Communication
 import asyncio
 
 # Prompt template
-system_template_ethics = "Could there be anything ethically wrong with this instruction to a robot? You should respond in a concise manner and your reponse should take the format \"Yes: \" followed by an exlanation, or \"No: \" followed by an explanation"
+system_template_ethics = "Could there be anything ethically wrong with this instruction to a robot? You should respond in a concise manner and your response should take the format \"Yes: \" followed by an explanation, or \"No: \" followed by an explanation"
 
 # Define the prompt
 prompt_template_ethics = ChatPromptTemplate.from_messages([("system", system_template_ethics), ("user", "{text}")])
