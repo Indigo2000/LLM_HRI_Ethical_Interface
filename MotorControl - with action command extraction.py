@@ -223,9 +223,8 @@ async def process_commands(queue):
     empty_notified = True
     
     # Robot waiting time set to value above 60 initially to indicate it is already at charging station
-    start_time = 61
-    # Amount of time robot will wait for before returning to charge (in seconds)
-    waiting = 60
+    start_time = Config.waiting + 1
+
     while Config.global_quit == False and Config.global_stop == False:
         
         # Checks to see if the queue is empty and if a notification has been given. Move the robot back to charge if queue is empty and it's not on charge already.
@@ -237,10 +236,10 @@ async def process_commands(queue):
             continue
         if directions_data["start_location"] != "Charging Station":   
             if queue.empty() and empty_notified:
-                if math.trunc(time.time()) - start_time < waiting:
+                if math.trunc(time.time()) - start_time < Config.waiting:
                     await asyncio.sleep(0.01)
                     continue
-                elif math.trunc(time.time()) - start_time == waiting:
+                elif math.trunc(time.time()) - start_time == Config.waiting:
                     print("Returning to charge and awaiting further instructions.\n")
                     await ActionCommand("Charging Station")
                     print("\nAwaiting further instructions.\n")
