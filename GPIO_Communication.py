@@ -10,9 +10,9 @@ except ModuleNotFoundError:
     print("gpiozero module not found - motor action will not be simulated")
     motors = False
 
-import Config
+import config
 import asyncio
-import EthicalControl
+import ethical_control
 
 # If motors connected, set them up along with the emergency stop physical button
 if motors:
@@ -65,8 +65,8 @@ async def emergency_stop(queue):
         await future
         print("Emergency Stop!")
         motor_stop()
-        Config.global_stop = True
-        await EthicalControl.purge_queue(queue)
+        config.global_stop = True
+        await ethical_control.purge_queue(queue)
         await asyncio.sleep(5)
            
 
