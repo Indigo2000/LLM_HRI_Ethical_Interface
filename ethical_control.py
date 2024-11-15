@@ -51,7 +51,7 @@ async def ethical_triggers(queue):
     if gpio_communication.motors:
         await gpio_communication.emergency_stop(queue)
     else:
-        while config.global_quit == False:
+        while not config.global_quit:
             await asyncio.sleep(0.01)
 
 

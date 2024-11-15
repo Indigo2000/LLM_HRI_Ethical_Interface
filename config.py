@@ -1,9 +1,9 @@
 import sys
 import os
 # Make sure to look in the local path for the libraries
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
 # Setup global quit variable
 global_quit = False
@@ -26,7 +26,7 @@ def load_keys():
         return keys
 
     except FileNotFoundError:
-        print("File not Found")
+        print("Keys File not Found")
         
 # Load Keys and set environment variables
 loaded_keys = load_keys()

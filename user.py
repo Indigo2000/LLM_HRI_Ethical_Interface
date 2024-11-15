@@ -9,7 +9,6 @@ import tkinter as tk
 import time
 import math
 import sys
-import logging
 
 # If this is running using ipykernel, import nest_asyncio and apply it
 if 'ipykernel' in sys.modules:
@@ -74,7 +73,7 @@ def interpret_command(command):
         directions_data["goal_location"] = destination
         directions_data["action"] = action
         return True
-    except:
+    except KeyError:
         print("Location not identified!\n")
         # If location does not exist, set the goal location to be the start location
         directions_data["goal_location"] =  directions_data["start_location"]
@@ -112,7 +111,7 @@ async def motion_control(route, distances, locations):
     # Counter for moving through the route
     counter = 0
     
-    # 
+    # Loop through each item in route and command motors to move in given directions
     for item in route:
         print("Moving ", item)
         if item == "forward":
@@ -142,10 +141,10 @@ async def motion_control(route, distances, locations):
         else:
             print("Unknown command for motor control")
             
-        # Stop motors after move
+        # Stop motors after given move
         gpio_communication.motor_stop()
         
-        # Quit this loop if the stop command has been given. Do not do the next move.
+        # Quit this loop if the stop command has been given. Do not do the next move in the route list
         if config.global_stop == True:
             break           
         
@@ -156,7 +155,7 @@ async def motion_control(route, distances, locations):
         counter = counter + 1 
 
 # Function to action the command received from the user        
-async def ActionCommand(command):
+async def action_command(command):
         
     # Update goal_location and action    
     if not interpret_command(command.title()):
@@ -178,8 +177,10 @@ async def ActionCommand(command):
         print("location not found. Please try again.")
         return
     
-    # Simulate motor response    
+    # Get specific directions and distances from the given route
     directions_list, distance_list = directions_list_create(directions)
+
+    # Simulate motor response
     await motion_control(directions_list, distance_list, directions)
     
     # Update start location
@@ -189,7 +190,7 @@ async def ActionCommand(command):
 # Function to get input from the user
 async def input_loop(queue, gui_app):
     
-    while config.global_quit == False:
+    while not config.global_quit:
         # Get user input without blocking the event loop
         user_input = await gui_app.get_input()
         
@@ -225,7 +226,7 @@ async def process_commands(queue):
     # Robot waiting time set to value above 60 initially to indicate it is already at charging station
     start_time = config.waiting + 1
 
-    while config.global_quit == False and config.global_stop == False:
+    while not config.global_quit and not config.global_stop:
         
         # Checks to see if the queue is empty and if a notification has been given. Move the robot back to charge if queue is empty and it's not on charge already.
         if queue.empty() and not empty_notified:
@@ -241,7 +242,7 @@ async def process_commands(queue):
                     continue
                 elif math.trunc(time.time()) - start_time == config.waiting:
                     print("Returning to charge and awaiting further instructions.\n")
-                    await ActionCommand("Charging Station")
+                    await action_command("Charging Station")
                     print("\nAwaiting further instructions.\n")
                     continue
                 
@@ -250,7 +251,7 @@ async def process_commands(queue):
         empty_notified = False        
         print("Processing command: ", command)
         # Action a user command
-        await ActionCommand(command)
+        await action_command(command)
         print("Finished processing command: ", command)
         print("\n")
         queue.task_done()
@@ -315,13 +316,16 @@ class GUIApp():
 # Function to refresh the window periodically
 async def update_tk(root):
     
-    while config.global_quit == False and config.global_stop == False:
+    while not config.global_quit and not config.global_stop:
         # Try to update the window, if not possible (i.e. window closed), stop the motors and terminate the whole program
         try:
+            if not root.winfo_exists():
+                raise tk.TclError("window destroyed")
             root.update()
-        except:
+        except tk.TclError:
             gpio_communication.motor_stop()
             config.global_quit = True
+            break
         await asyncio.sleep(0.01)
 
 # Main function
@@ -337,7 +341,7 @@ async def main():
     # Run the asyncio event loop with the Tkinter main loop
     loop = asyncio.get_event_loop()
     
-    while config.global_quit == False:
+    while not config.global_quit:
         # Set up main concurrent tasks
         producer = asyncio.create_task(input_loop(queue, gui_app))
         consumer = asyncio.create_task(process_commands(queue))
@@ -346,7 +350,7 @@ async def main():
         
         # Look out for producer, gui_refresh or ongoing_ethics to complete so we can cancel the other tasks
         done, pending = await asyncio.wait([producer, consumer, gui_refresh, ongoing_ethics], return_when=asyncio.FIRST_COMPLETED)
-        # Cancel other tasks if ine ends
+        # Cancel other tasks if one ends
         if producer in done:
             consumer.cancel()
             gui_refresh.cancel()

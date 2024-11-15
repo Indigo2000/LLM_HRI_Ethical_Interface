@@ -16,7 +16,7 @@ import ethical_control
 
 # If motors connected, set them up along with the emergency stop physical button
 if motors:
-    # Set u the pins
+    # Set up the pins
     Device.pin_factory = PiGPIOFactory()
 
     # GPIO setup
@@ -24,7 +24,7 @@ if motors:
     motor_lr = Motor(forward=18, backward=19)
     stop_switch = Button(17)
 
-# Motor control functions
+# Motor control functions - only tries to move motors if gpiozero module found
 def motor_stop():
     if motors:
         motor_fb.stop()
@@ -67,12 +67,11 @@ async def emergency_stop(queue):
         motor_stop()
         config.global_stop = True
         await ethical_control.purge_queue(queue)
-        await asyncio.sleep(5)
-           
+        await asyncio.sleep(0.01)
 
 
-#Turn off any running motors on initial startup
+# Turn off any running motors on initial startup
 if motors:
-    motor_stop
+    motor_stop()
     
 

@@ -1,6 +1,3 @@
-import config
-
-   
 async def check_security():
 	
 	# Inform user of authorisation checks
