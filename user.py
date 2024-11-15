@@ -25,10 +25,16 @@ goal_location = 'Charging Station'
 action_command = 'None'
 
 # Prompt template
-system_template_destination = "You are presented with an instruction destined for a robot. You need to return a destination location/utility, an action, or both. The format of your response should be given as \"Destination: ..., Action:...\" where \"...\" is replaced by the desired destination and action. If no destination or action is found in the command, replace \"...\" with \"None\". Your responses are limited to the locations and actions in the lists provided."
+system_template_destination = ("You are presented with an instruction destined for a robot. You need to return a"
+                               " destination location/utility, an action, or both. The format of your response should"
+                               " be given as \"Destination: ..., Action:...\" where \"...\" is replaced by the desired"
+                               " destination and action. If no destination or action is found in the command, replace"
+                               " \"...\" with \"None\". Your responses are limited to the locations and actions in the"
+                               " lists provided.")
     
 # Define the prompt
-prompt_template_destination = ChatPromptTemplate.from_messages([("system", system_template_destination), ("user", "{text}")])
+prompt_template_destination = ChatPromptTemplate.from_messages([("system", system_template_destination), ("user",
+                                                                                                          "{text}")])
 
 # Define the chain
 chain_destination = prompt_template_destination | config.model | config.parser
@@ -44,14 +50,16 @@ directions_data = {
 
 # Function to find the route
 async def process_command_route():
-    response = await layout.a_star_search(layout.graph, directions_data["start_location"], directions_data["goal_location"], layout.h)
+    response = await (layout.a_star_search(layout.graph, directions_data["start_location"],
+                                           directions_data["goal_location"], layout.h))
     print("Route found to be: ", response)
     return response
 
 # Function to find the destination and action
 def interpret_command(command):
     # Add the list of possible locations and actions to the command
-    updated_command = command + " The list containing available locations/utilities is: " + str(layout.h) + " The list containing available actions is: " + str(layout.actions)
+    updated_command = (command + " The list containing available locations/utilities is: " + str(layout.h) +
+                       " The list containing available actions is: " + str(layout.actions))
     
     # Invoke the LLM to generate the response
     response = chain_destination.invoke({"text": updated_command})
@@ -127,16 +135,20 @@ async def motion_control(route, distances, locations):
             await asyncio.gather(gpio_communication.motor_right(distances[counter]))
             
         elif item == "diagonally forward and left":
-            await asyncio.gather(gpio_communication.motor_forward(distances[counter]), gpio_communication.motor_left(distances[counter]))
+            await (asyncio.gather(gpio_communication.motor_forward(distances[counter]),
+                                  gpio_communication.motor_left(distances[counter])))
         
         elif item == "diagonally forward and right":
-            await asyncio.gather(gpio_communication.motor_forward(distances[counter]), gpio_communication.motor_right(distances[counter]))
+            await (asyncio.gather(gpio_communication.motor_forward(distances[counter]),
+                                  gpio_communication.motor_right(distances[counter])))
             
         elif item == "diagonally back and right":
-            await asyncio.gather(gpio_communication.motor_backward(distances[counter]), gpio_communication.motor_right(distances[counter]))
+            await (asyncio.gather(gpio_communication.motor_backward(distances[counter]),
+                                  gpio_communication.motor_right(distances[counter])))
             
         elif item == "diagonally back and left":
-            await asyncio.gather(gpio_communication.motor_backward(distances[counter]), gpio_communication.motor_left(distances[counter]))
+            await (asyncio.gather(gpio_communication.motor_backward(distances[counter]),
+                                  gpio_communication.motor_left(distances[counter])))
         
         else:
             print("Unknown command for motor control")
@@ -228,13 +240,14 @@ async def process_commands(queue):
 
     while not config.global_quit and not config.global_stop:
         
-        # Checks to see if the queue is empty and if a notification has been given. Move the robot back to charge if queue is empty and it's not on charge already.
+        # Check to see if the queue is empty and if a notification has been given. Give one if not.
         if queue.empty() and not empty_notified:
             empty_notified = True
             print("Awaiting further instructions...\n")
             start_time = math.trunc(time.time())
             await asyncio.sleep(0.01)
             continue
+        # Move robot back to charge if queue is empty, a notification has been given, and it's not on charge already.
         if directions_data["start_location"] != "Charging Station":   
             if queue.empty() and empty_notified:
                 if math.trunc(time.time()) - start_time < config.waiting:
@@ -317,7 +330,7 @@ class GUIApp():
 async def update_tk(root):
     
     while not config.global_quit and not config.global_stop:
-        # Try to update the window, if not possible (i.e. window closed), stop the motors and terminate the whole program
+        # Try to update the window, if not possible (i.e. window closed), stop the motors and terminate program
         try:
             if not root.winfo_exists():
                 raise tk.TclError("window destroyed")
@@ -349,7 +362,8 @@ async def main():
         ongoing_ethics = asyncio.create_task(ethical_control.ethical_triggers(queue))
         
         # Look out for producer, gui_refresh or ongoing_ethics to complete so we can cancel the other tasks
-        done, pending = await asyncio.wait([producer, consumer, gui_refresh, ongoing_ethics], return_when=asyncio.FIRST_COMPLETED)
+        done, pending = await (asyncio.wait([producer, consumer, gui_refresh, ongoing_ethics],
+                                            return_when=asyncio.FIRST_COMPLETED))
         # Cancel other tasks if one ends
         if producer in done:
             consumer.cancel()
