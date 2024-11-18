@@ -1,9 +1,9 @@
 import sys
 import os
 # Make sure to look in the local path for the libraries
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
 # Setup global quit variable
 global_quit = False
@@ -37,5 +37,5 @@ os.environ["LANGCHAIN_PROJECT"] = "LangChain Tutorial 1"
 os.environ["OPENAI_API_KEY"] = loaded_keys.get('OPENAI_API_KEY')
 
 # Set model and parser
-model = ChatOpenAI(model="gpt-4o-mini")
+model = ChatOpenAI(model="gpt-4o-mini-2024-07-18")
 parser = StrOutputParser()

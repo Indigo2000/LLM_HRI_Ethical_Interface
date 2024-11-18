@@ -87,6 +87,8 @@ actions = {
     'Take out',
     'Iron',
     'Fold',
+    'Carry',
+    'Take to',
     'Put away',
     'Hang up',
     'Switch on'
