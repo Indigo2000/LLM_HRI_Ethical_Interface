@@ -98,18 +98,14 @@ actions = {
 async def a_star_search(graph, start, goal, h):
     open_set = []
     heapq.heappush(open_set, (h[start], 0, start, [(start, None)]))  # (f_score, g_score, current_node, path)
-
     closed_set = set()
 
     while open_set:
         f_score, g_score, current_node, path = heapq.heappop(open_set)
-
         if current_node == goal:
             return path[1:]  # Exclude the initial None direction
-
         if current_node in closed_set:
             continue
-
         closed_set.add(current_node)
 
         for neighbour, cost, direction in graph.get(current_node, []):

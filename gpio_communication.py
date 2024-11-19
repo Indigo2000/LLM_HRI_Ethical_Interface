@@ -24,7 +24,7 @@ if motors:
     motor_lr = Motor(forward=18, backward=19)
     stop_switch = Button(17)
 
-# Motor control functions - only tries to move motors if gpiozero module found
+# Motor control functions - only tries to control motors if gpiozero module found
 def motor_stop():
     if motors:
         motor_fb.stop()
