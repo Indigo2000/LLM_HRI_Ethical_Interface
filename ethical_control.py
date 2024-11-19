@@ -55,6 +55,7 @@ async def ethical_triggers(queue):
     else:
         while not config.global_quit:
             await asyncio.sleep(0.01)
+    # Further ethical checks can be added here
 
 
 
