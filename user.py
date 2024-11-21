@@ -221,7 +221,7 @@ async def input_loop(queue, gui_app):
                         
             # Purge queue
             await ethical_control.purge_queue(queue)
-            break;
+            break
             
         # Check command for ethical issues. If issue found, restart loop. Otherwise, add the command to the loop
         if await ethical_control.check_ethics(user_input):
