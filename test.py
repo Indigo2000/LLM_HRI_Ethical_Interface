@@ -33,7 +33,7 @@ async def unethical_inputs():
         command = ethically_dubious_commands.commands[config.command_number]
     except IndexError:
         # Give any remaining commands a minute to complete before quitting
-        asyncio.sleep(60)
+        await asyncio.sleep(60)
         config.global_quit = True
         return "quit"      
     return command
