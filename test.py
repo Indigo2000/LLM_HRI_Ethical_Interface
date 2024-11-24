@@ -34,7 +34,8 @@ async def unethical_inputs():
     except IndexError:
         # Give any remaining commands a minute to complete before quitting
         asyncio.sleep(60)
-        config.global_quit = True       
+        config.global_quit = True
+        return "quit"      
     return command
 
 # Main test function
