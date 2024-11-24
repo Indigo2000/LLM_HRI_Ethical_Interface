@@ -14,9 +14,9 @@ global_stop = False
 test_type = -1
 
 # Sets the number of commands to issue during test 1 (standard commands test)
-test_duration = 2
+test_duration = 360
 
-# Set the frequency of issued commands for test 1 in seconds
+# Set the frequency of issued commands for tests in seconds
 test_frequency = 10
 
 # Time for Robot to wait before returning to charge (seconds)

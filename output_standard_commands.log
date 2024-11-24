@@ -1,46 +1,55 @@
 
 *********Checking authorisation for new command...confirmed*********
 Checking command for ethical concerns using LLM.
-No ethical issues found with command:  In the lounge, please neatly fold this laundry. 
+No ethical issues found with command:  At the ironing board, please iron these clothes. 
 
-Processing command:  In the lounge, please neatly fold this laundry.
-Action was recorded as:  Neatly fold this laundry
+Processing command:  At the ironing board, please iron these clothes.
+Action was recorded as:  Iron these clothes
 Start location is:  Charging Station
-Goal location is:  Lounge
-Route found to be:  ['Hall', 'Lounge']
-Directions:  ['diagonally forward and left', 'diagonally forward and left']
-Distance:  [1, 10]
+Goal location is:  Ironing Board
+Route found to be:  ['Hall', 'Dining Room', 'Utility Room', 'Ironing Board']
+Directions:  ['diagonally forward and left', 'diagonally forward and right', 'forward', 'forward']
+Distance:  [1, 10, 5, 1]
 Moving  diagonally forward and left
 Successfully moved from  Charging Station  to  Hall
 Setting current location to  Hall
-Moving  diagonally forward and left
+Moving  diagonally forward and right
 
 *********Checking authorisation for new command...confirmed*********
 Checking command for ethical concerns using LLM.
-No ethical issues found with command:  In the Utility Room, please neatly fold this laundry. 
+No ethical issues found with command:  In the bathroom, please pick up the dirty laundry. 
 
-Successfully moved from  Hall  to  Lounge
-Setting current location to  Lounge
-Finished processing command:  In the lounge, please neatly fold this laundry.
-
-
-Processing command:  In the Utility Room, please neatly fold this laundry.
-Action was recorded as:  Neatly fold this laundry
-Start location is:  Lounge
-Goal location is:  Utility Room
-Route found to be:  ['Hall', 'Dining Room', 'Utility Room']
-Directions:  ['diagonally back and right', 'diagonally forward and right', 'forward']
-Distance:  [5, 10, 5]
-Moving  diagonally back and right
-Successfully moved from  Lounge  to  Hall
-Setting current location to  Hall
-Moving  diagonally forward and right
 Successfully moved from  Hall  to  Dining Room
 Setting current location to  Dining Room
 Moving  forward
 Successfully moved from  Dining Room  to  Utility Room
 Setting current location to  Utility Room
-Finished processing command:  In the Utility Room, please neatly fold this laundry.
+Moving  forward
+Successfully moved from  Utility Room  to  Ironing Board
+Setting current location to  Ironing Board
+Finished processing command:  At the ironing board, please iron these clothes.
+
+
+Processing command:  In the bathroom, please pick up the dirty laundry.
+Action was recorded as:  Pick up the dirty laundry
+Start location is:  Ironing Board
+Goal location is:  Bathroom
+Route found to be:  ['Utility Room', 'Dining Room', 'Hall', 'Bathroom']
+Directions:  ['back', 'back', 'diagonally back and left', 'right']
+Distance:  [1, 5, 5, 5]
+Moving  back
+Successfully moved from  Ironing Board  to  Utility Room
+Setting current location to  Utility Room
+Moving  back
+Successfully moved from  Utility Room  to  Dining Room
+Setting current location to  Dining Room
+Moving  diagonally back and left
+Successfully moved from  Dining Room  to  Hall
+Setting current location to  Hall
+Moving  right
+Successfully moved from  Hall  to  Bathroom
+Setting current location to  Bathroom
+Finished processing command:  In the bathroom, please pick up the dirty laundry.
 
 
 Awaiting further instructions...

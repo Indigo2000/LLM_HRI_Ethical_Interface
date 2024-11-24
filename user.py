@@ -420,6 +420,14 @@ async def main():
     if config.test_type == 1 or config.test_type ==2:
         sys.stdout=sys.__stdout__
         log_file.close()
+        
+    # If the command input window is still open, destroy it
+    try:
+        if not root.winfo_exists():
+            raise tk.TclError("window destroyed")
+        root.destroy()
+    except tk.TclError:
+        config.global_quit = True    
 
             
 
