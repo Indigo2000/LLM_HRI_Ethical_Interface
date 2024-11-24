@@ -1,7 +1,7 @@
 import config
 import asyncio
 import ethical_control
-import security_check
+import security_privacy_check
 import layout
 import gpio_communication
 from langchain_core.prompts import ChatPromptTemplate
@@ -206,8 +206,8 @@ async def input_loop(queue, gui_app):
         # Get user input without blocking the event loop
         user_input = await gui_app.get_input()
         
-        # Check user is authorised to give command
-        await security_check.check_security()
+        # Check user is authorised to give command and remove personal data before transmission to LLM
+        await security_privacy_check.check_security()
         
         # If user has typed quit, stop the motors and quit the program
         if user_input.lower() == 'quit':
