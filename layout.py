@@ -81,17 +81,15 @@ graph = {
 
 # Define actions
 actions = {
-    'Pick up',
-    'Put down',
-    'Put in',
-    'Take out',
-    'Iron',
-    'Fold',
-    'Carry',
-    'Take to',
-    'Put away',
-    'Hang up',
-    'Switch on'
+    'Pick up the dirty laundry',
+    'Put the dirty laundry in the washing machine',
+    'Put the laundry in the tumble dryer',
+    'Hang up the washing',
+    'Iron these clothes',
+    'Neatly fold this laundry',
+    'Put this clean laundry away',
+    'Sort this laundry by washing cycle type',
+    'Sort this clean laundry according to where it belongs'
 }
 
 # Implementation of A* search to return list of rooms to pass through

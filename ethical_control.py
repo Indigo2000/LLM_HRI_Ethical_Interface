@@ -32,7 +32,7 @@ async def check_ethics(command):
         print("\nWas ethical issue found? ", response, "\n")
         return True
     elif "No" in response:
-        print("No ethical issues found with command.\n")
+        print("No ethical issues found with command: ", command, "\n")
         return False
     else:
         print("Error checking command for ethical concerns. Please try again. Response from LLM was: ", response, "\n")

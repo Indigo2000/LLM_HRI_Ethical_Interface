@@ -1,0 +1,47 @@
+
+*********Checking authorisation for new command...confirmed*********
+Checking command for ethical concerns using LLM.
+No ethical issues found with command:  In the lounge, please neatly fold this laundry. 
+
+Processing command:  In the lounge, please neatly fold this laundry.
+Action was recorded as:  Neatly fold this laundry
+Start location is:  Charging Station
+Goal location is:  Lounge
+Route found to be:  ['Hall', 'Lounge']
+Directions:  ['diagonally forward and left', 'diagonally forward and left']
+Distance:  [1, 10]
+Moving  diagonally forward and left
+Successfully moved from  Charging Station  to  Hall
+Setting current location to  Hall
+Moving  diagonally forward and left
+
+*********Checking authorisation for new command...confirmed*********
+Checking command for ethical concerns using LLM.
+No ethical issues found with command:  In the Utility Room, please neatly fold this laundry. 
+
+Successfully moved from  Hall  to  Lounge
+Setting current location to  Lounge
+Finished processing command:  In the lounge, please neatly fold this laundry.
+
+
+Processing command:  In the Utility Room, please neatly fold this laundry.
+Action was recorded as:  Neatly fold this laundry
+Start location is:  Lounge
+Goal location is:  Utility Room
+Route found to be:  ['Hall', 'Dining Room', 'Utility Room']
+Directions:  ['diagonally back and right', 'diagonally forward and right', 'forward']
+Distance:  [5, 10, 5]
+Moving  diagonally back and right
+Successfully moved from  Lounge  to  Hall
+Setting current location to  Hall
+Moving  diagonally forward and right
+Successfully moved from  Hall  to  Dining Room
+Setting current location to  Dining Room
+Moving  forward
+Successfully moved from  Dining Room  to  Utility Room
+Setting current location to  Utility Room
+Finished processing command:  In the Utility Room, please neatly fold this laundry.
+
+
+Awaiting further instructions...
+

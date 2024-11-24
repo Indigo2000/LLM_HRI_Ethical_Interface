@@ -15,9 +15,6 @@ if 'ipykernel' in sys.modules:
     import nest_asyncio
     nest_asyncio.apply()
     
-# To print stdout to file, remove the '#' on the next two lines and also from the last two lines of the file
-#log_file = open("output.log", "w")
-#sys.stdout = log_file
 
 # Set the initial start, end and action positions
 start_location = 'Charging Station'
@@ -168,6 +165,9 @@ async def motion_control(route, distances, locations):
 
 # Function to action the command received from the user        
 async def action_command(command):
+    
+    # Show we have an active task
+    config.task_active = True
         
     # Update goal_location and action    
     if not interpret_command(command.title()):
@@ -197,15 +197,32 @@ async def action_command(command):
     
     # Update start location
     directions_data["start_location"] = directions_data["goal_location"]
+    
+    # Mark task as complete
+    config.task_active = False
 
  
 # Function to get input from the user
 async def input_loop(queue, gui_app):
     import test
     
+    # Initialise a counter for counting tests in testing mode
+    test_loop = 0
+    
     while not config.global_quit:
         if config.test_type == 1:
-            user_input = await test.standard_inputs()
+            if test_loop<config.test_duration:
+                user_input = await test.standard_inputs()
+                await asyncio.sleep(config.test_frequency)
+                test_loop = test_loop+1
+            else:
+                # Quit the first test once completed commands from queue
+                if not config.task_active and queue.empty():
+                    config.global_quit = True
+                else:
+                    # Allow operations to continue while we wait for queue to empty
+                    await asyncio.sleep(0.01)
+                continue
         elif config.test_type == 2:
             user_input = await test.unethical_inputs()
         else:
@@ -214,7 +231,7 @@ async def input_loop(queue, gui_app):
         
         # Check user is authorised to give command and remove personal data before transmission to LLM
         await security_privacy_check.check_security()
-        
+
         # If user has typed quit, stop the motors and quit the program
         if user_input.lower() == 'quit':
             gpio_communication.motor_stop()
@@ -270,6 +287,7 @@ async def process_commands(queue):
         empty_notified = False        
         print("Processing command: ", command)
         # Action a user command
+
         await action_command(command)
         print("Finished processing command: ", command)
         print("\n")
@@ -349,6 +367,15 @@ async def update_tk(root):
 
 # Main function
 async def main():
+    
+    # If we're doing one of the tests, print to file
+    if config.test_type == 1:
+        log_file = open("output_standard_commands.log", "w")
+        sys.stdout = log_file
+    if config.test_type == 2:
+        log_file = open("output_unethical_commands.log", "w")
+        sys.stdout = log_file
+    
     # Set up the command queue
     queue = asyncio.Queue()    
     
@@ -386,10 +413,13 @@ async def main():
             
         # Reset global_stop command
         config.global_stop = False
+    # Close the log file if we've been testing    
+    if config.test_type == 1 or config.test_type ==2:
+        sys.stdout=sys.__stdout__
+        log_file.close()
+
             
 
 if __name__ == "__main__":
     asyncio.run(main())
 
-#sys.stdout=sys.__stdout__
-#log_file.close()

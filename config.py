@@ -5,10 +5,19 @@ import os
 #sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
 #sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
-# Setup global quit, stop and test_type variables
+# Variable to signify if we have an active task
+task_active = False
+
+# Setup global quit, stop and test variables
 global_quit = False
 global_stop = False
 test_type = -1
+
+# Sets the number of commands to issue during test 1 (standard commands test)
+test_duration = 2
+
+# Set the frequency of issued commands for test 1 in seconds
+test_frequency = 10
 
 # Time for Robot to wait before returning to charge (seconds)
 waiting = 60
