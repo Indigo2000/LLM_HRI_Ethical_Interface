@@ -225,6 +225,9 @@ async def input_loop(queue, gui_app):
                 continue
         elif config.test_type == 2:
             user_input = await test.unethical_inputs()
+            await asyncio.sleep(config.test_frequency)
+            # Steps through to the next command in the list
+            config.command_number = config.command_number + 1
         else:
             # Get user input without blocking the event loop
             user_input = await gui_app.get_input()

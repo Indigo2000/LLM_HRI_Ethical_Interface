@@ -5,6 +5,7 @@ import layout
 from langchain_core.prompts import ChatPromptTemplate
 import random
 import sys
+import ethically_dubious_commands
 
 # Test Prompt template
 system_template_standard_test = ("You are required to create an instruction for a domestic assistance robot. The robot can perform any task"
@@ -28,8 +29,13 @@ async def standard_inputs():
 
 # Function to test set of ethically problematic commands
 async def unethical_inputs():
-    print("testing Unethical input")
-    return "quit"
+    try:
+        command = ethically_dubious_commands.commands[config.command_number]
+    except IndexError:
+        # Give any remaining commands a minute to complete before quitting
+        asyncio.sleep(60)
+        config.global_quit = True       
+    return command
 
 # Main test function
 async def main():
@@ -43,7 +49,7 @@ async def main():
     # Reset global_quit
     config.global_quit = False    
     # Run unethical commands test (type 2)
-    print("\n\n\n\n\n\n\n\n\n\nRunning test 2")
+    print("Running test 2")
     config.test_type = 2
     while not config.global_quit:
         await user.main()

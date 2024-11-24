@@ -22,6 +22,9 @@ test_frequency = 10
 # Time for Robot to wait before returning to charge (seconds)
 waiting = 60
 
+# Variable for counting through commands in ethically_dubious_commands
+command_number = 0
+
 import json
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
