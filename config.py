@@ -1,13 +1,14 @@
 import sys
 import os
 # Make sure to look in the local path for the libraries
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
-# Setup global quit variable
+# Setup global quit, stop and test_type variables
 global_quit = False
 global_stop = False
+test_type = -1
 
 # Time for Robot to wait before returning to charge (seconds)
 waiting = 60

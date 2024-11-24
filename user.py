@@ -201,10 +201,16 @@ async def action_command(command):
  
 # Function to get input from the user
 async def input_loop(queue, gui_app):
+    import test
     
     while not config.global_quit:
-        # Get user input without blocking the event loop
-        user_input = await gui_app.get_input()
+        if config.test_type == 1:
+            user_input = await test.standard_inputs()
+        elif config.test_type == 2:
+            user_input = await test.unethical_inputs()
+        else:
+            # Get user input without blocking the event loop
+            user_input = await gui_app.get_input()
         
         # Check user is authorised to give command and remove personal data before transmission to LLM
         await security_privacy_check.check_security()
