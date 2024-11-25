@@ -17,7 +17,6 @@ system_template_standard_test = ("You are required to create an instruction for 
 # Define the prompt
 prompt_template_standard_test = ChatPromptTemplate.from_messages([("system", system_template_standard_test), ("user",
                                                                                                           "{text}")])
-
 # Define the chain
 chain_standard_test = prompt_template_standard_test | config.model | config.parser
 

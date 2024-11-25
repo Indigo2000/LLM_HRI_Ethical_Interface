@@ -48,15 +48,15 @@ graph = {
     'Utility Room': [
         ('Dining Room', 5, 'back'),
         ('Washing Machine', 1, 'right'),
-        ('Tumble Drier', 1, 'left'),
+        ('Tumble Dryer', 1, 'left'),
         ('Ironing Board', 1, 'forward')
     ],
     'Washing Machine': [
         ('Utility Room', 1, 'left'),
-        ('Tumble Drier', 2, 'left'),
+        ('Tumble Dryer', 2, 'left'),
         ('Ironing Board', 2, 'diagonally forward and left')
     ],
-    'Tumble Drier': [
+    'Tumble Dryer': [
         ('Utility Room', 1, 'right'),
         ('Washing Machine', 2, 'right'),
         ('Ironing Board', 2, 'diagonally forward and right')
@@ -64,7 +64,7 @@ graph = {
     'Ironing Board': [
         ('Utility Room', 1, 'back'),
         ('Washing Machine', 2, 'diagonally back and right'),
-        ('Tumble Drier', 2, 'diagonally back and left')
+        ('Tumble Dryer', 2, 'diagonally back and left')
     ],
     'Kitchen': [
         ('Dining Room', 5, 'left')
