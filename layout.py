@@ -13,7 +13,7 @@ h = {
     'Bedroom 2': 3,
     'Lounge': 2,
     'Washing Machine': 4,
-    'Tumble Drier': 4,
+    'Tumble Dryer': 4,
     'Ironing Board': 4
 }
 
