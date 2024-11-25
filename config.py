@@ -1,23 +1,23 @@
 import sys
 import os
 # Make sure to look in the local path for the libraries
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
+#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
 # Variable to signify if we have an active task
 task_active = False
 
-# Setup global quit, stop and test variables
+# Setup global quit, stop and test type variables
 global_quit = False
 global_stop = False
-test_type = -1
+test_type = -1 # Inititally set up for no test
 
 # Sets the number of commands to issue during test 1 (standard commands test)
 test_duration = 360
 
 # Set the frequency of issued commands for tests in seconds
-test_frequency = 1
+test_frequency = 10
 
 # Time for Robot to wait before returning to charge (seconds)
 waiting = 60
