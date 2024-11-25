@@ -205,7 +205,6 @@ async def action_command(command):
 # Function to get input from the user
 async def input_loop(queue, gui_app):
     import test
-    
     # Initialise a counter for counting tests in testing mode
     test_loop = 0
     
@@ -244,7 +243,6 @@ async def input_loop(queue, gui_app):
         # If user has typed stop, stop the motors and clear queue    
         if user_input.lower() == 'stop':            
             gpio_communication.motor_stop()
-                        
             # Purge queue
             await ethical_control.purge_queue(queue)
             break
@@ -370,7 +368,6 @@ async def update_tk(root):
 
 # Main function
 async def main():
-    
     # If we're doing one of the tests, print to file
     if config.test_type == 1:
         log_file = open("output_standard_commands.log", "w")
@@ -416,6 +413,7 @@ async def main():
             
         # Reset global_stop command
         config.global_stop = False
+
     # Close the log file if we've been testing    
     if config.test_type == 1 or config.test_type ==2:
         sys.stdout=sys.__stdout__
@@ -429,7 +427,6 @@ async def main():
     except tk.TclError:
         config.global_quit = True    
 
-            
 
 if __name__ == "__main__":
     asyncio.run(main())
