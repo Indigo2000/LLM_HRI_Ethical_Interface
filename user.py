@@ -373,7 +373,7 @@ async def main():
         log_file = open("output_standard_commands.log", "w")
         sys.stdout = log_file
     if config.test_type == 2:
-        log_file = open("output_unethical_commands10.log", "w")
+        log_file = open("output_unethical_commands.log", "w")
         sys.stdout = log_file
     
     # Set up the command queue
