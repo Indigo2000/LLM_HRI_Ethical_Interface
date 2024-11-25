@@ -1,9 +1,9 @@
 import sys
 import os
 # Make sure to look in the local path for the libraries
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
-#sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_core'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'langchain_openai'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'openai'))
 
 # Variable to signify if we have an active task
 task_active = False
@@ -11,7 +11,7 @@ task_active = False
 # Setup global quit, stop and test type variables
 global_quit = False
 global_stop = False
-test_type = -1 # Inititally set up for no test
+test_type = -1 # Initially set up for no test
 
 # Sets the number of commands to issue during test 1 (standard commands test)
 test_duration = 360
