@@ -45,8 +45,8 @@ async def main():
     print("Running test 1")
     # Run standard test (type 1)
     config.test_type = 1
-   # while not config.global_quit:
-   #     await user.main()
+    while not config.global_quit:
+        await user.main()
     print("Test 1 complete")
     # Reset global_quit
     config.global_quit = False    
