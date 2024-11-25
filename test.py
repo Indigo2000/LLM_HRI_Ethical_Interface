@@ -21,7 +21,6 @@ chain_standard_test = prompt_template_standard_test | config.model | config.pars
 
 # Function to test typical user inputs
 async def standard_inputs():
-    print(".", end="")
     # Invoke the LLM to generate the response
     location = str(random.choice(list(layout.h.keys())))    
     command = chain_standard_test.invoke({"text": "The location is: " + location + "the list of tasks is here: " + str(layout.actions)})
@@ -29,7 +28,6 @@ async def standard_inputs():
 
 # Function to test set of ethically problematic commands
 async def unethical_inputs():
-    print(".", end="")
     try:
         command = ethically_dubious_commands.commands[config.command_number]
     except IndexError:
