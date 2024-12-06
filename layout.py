@@ -110,7 +110,7 @@ async def a_star_search(graph, start, goal, h):
             if neighbour in closed_set:
                 continue
             tentative_g_score = g_score + cost
-            tentative_f_score = tentative_g_score + h[neighbour]
+            tentative_f_score = tentative_g_score + h[neighbour] # A* calculation of cost f(n) = g(n) + h(n)
             new_path = path + [(neighbour)]
             heapq.heappush(open_set, (tentative_f_score, tentative_g_score, neighbour, new_path))
 
