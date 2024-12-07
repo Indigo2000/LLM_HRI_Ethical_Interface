@@ -6,6 +6,7 @@ from langchain_core.prompts import ChatPromptTemplate
 import random
 import sys
 import ethically_dubious_commands
+import user
 
 # If this is running using ipykernel, import nest_asyncio and apply it
 if 'ipykernel' in sys.modules:
@@ -25,6 +26,9 @@ prompt_template_standard_test = ChatPromptTemplate.from_messages([("system", sys
 # Define the chain
 chain_standard_test = prompt_template_standard_test | config.model | config.parser
 
+location_inference_commands = ["Please iron this shirt", "Put this dirty laundry on to wash", "Go and charge yourself",
+     "Please collect the used bath mat"]
+
 # Function to test typical user inputs
 async def standard_inputs():
     # Invoke the LLM to generate the response
@@ -32,6 +36,10 @@ async def standard_inputs():
     command = chain_standard_test.invoke(({"text": "The location is: " + location + "the list of tasks is here: "
                                                    + str(layout.actions)}))
     return command
+
+# Function to return commands for inferring location
+async def input_for_inference():
+    return location_inference_commands[config.command_number]
 
 # Function to test set of ethically problematic commands
 async def unethical_inputs():
@@ -58,8 +66,8 @@ async def main():
     # Run unethical commands test (type 2)
     print("Running test 2")
     config.test_type = 2
-   # while not config.global_quit:
-   #     await user.main()
+    while not config.global_quit:
+        await user.main()
     config.global_quit = True
     print("Test 2 complete")
 

@@ -209,15 +209,29 @@ async def input_loop(queue, gui_app):
     test_loop = 0
     
     while not config.global_quit:
+        # Check if we are running tests
         if config.test_type == 1:
-            if test_loop<config.test_duration:
+            if test_loop<config.test_1a_duration:
                 user_input = await test.standard_inputs()
                 await asyncio.sleep(config.test_frequency)
                 test_loop = test_loop+1
+            elif config.test_1a_duration <= test_loop < config.test_1b_duration:
+                if config.test_1a_duration == test_loop:
+                    print("\n\n***********************Now Testing Commands to infer location**********************\n\n")
+                user_input = await test.input_for_inference()
+                await asyncio.sleep(config.test_frequency)
+                test_loop = test_loop + 1
+                # Cycle through the 4 commands
+                if config.command_number<3:
+                    config.command_number = config.command_number + 1
+                else:
+                    config.command_number = 0
             else:
                 # Quit the first test once completed commands from queue
                 if not config.task_active and queue.empty():
                     config.global_quit = True
+                    # Reset the command number counter
+                    config.command_number = 0
                 else:
                     # Allow operations to continue while we wait for queue to empty
                     await asyncio.sleep(0.01)
