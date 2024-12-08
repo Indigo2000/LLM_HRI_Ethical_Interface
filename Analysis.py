@@ -4,53 +4,95 @@ from collections import Counter
 
 # Define the list of locations
 locations = [
-    "Charging Station", "Hall", "Study", "Bathroom", "Dining Room", "Kitchen",
-    "Utility Room", "Bedroom 1", "Bedroom 2", "Lounge",
-    "Washing Machine", "Tumble Dryer", "Ironing Board"
+    {"charging station": 0}, {"hall": 0}, {"study": 0}, {"bathroom": 0}, {"dining room": 0}, {"kitchen": 0},
+    {"utility room": 0}, {"bedroom 1": 0}, {"bedroom 2": 0}, {"lounge": 0},
+    {"washing machine": 0}, {"tumble Dryer": 0}, {"ironing board": 0}, {"location": 0}, {"laundry room": 0},
+    {"location not identified": 0}
 ]
 
 # Initialize counters for the case-insensitive search
-processing_command_case_insensitive_count = 0
+pro_wash_ute = 0
+no_ethical_issues = 0
+ethical_issues = 0
+location_in_command_count = 0
 
 # Count the occurrences of the phrase in the uploaded file
 file_path = 'output_standard_commands.log'
-phrase = "No ethical issues found with command:"
+#phrase = "No ethical issues found with command:"
 
 # Read the file and count occurrences
 with open(file_path, 'r') as file:
-    content = file.read()
-    occurrences = content.count(phrase)
+    content = file.readlines()
 
-    # Read the file and analyze line by line with case insensitivity
+    # Analyze line by line with case insensitivity
     for line in content:
-        # Check for the required keywords in the same line, case-insensitive
-        if ('processing command:' in line.lower() and
-                'washing machine' in line.lower() and
-                'utility room' in line.lower()):
-            processing_command_case_insensitive_count += 1
+        lower_line = line.lower()
+        # Check for processing, w/machine and utility in same line,
+        if (not 'finished' in lower_line and 'processing command:' in lower_line
+        and 'washing machine' in lower_line and 'utility room' in
+               lower_line):
+            pro_wash_ute += 1
+        # Check for no ethical issues found then retrieve locations
+        if "no ethical issues found with command:" in lower_line:
+            no_ethical_issues += 1
 
-print("Number of times phrase \"No ethical issues found with command:\" appears:", occurrences, " out of 360 times.\n")
+            # Count how many times a location appears as a goal
+            for item in locations:
+                # Update locations with tally of how many times a location appears in the command
+                location_word = list(item.keys())[0]
+                if location_word in lower_line:
+                    item[location_word] += 1
 
-# Extract and summarize location requests from lines that start with "Processing command:"
-pattern = re.compile(r"Goal location is:.*?\b(" + "|".join(re.escape(loc) for loc in locations) + r")\b", re.IGNORECASE)
+                    # Update total number of locations found in a command
+                    location_in_command_count += 1
+
+        # Check for ethical issues found then retrieve locations
+        if ("was ethical issue found with command:" in lower_line):
+            ethical_issues += 1
+
+
+
+
+
+# Extract and summarize goal locations from lines that start with "Goal location is:"
+#pattern = re.compile(r"Goal location is:.*?\b(" + "|".join(re.escape(loc) for loc in locations) + r")\b", re.IGNORECASE)
+
+
+#response.find(":") + 2
 
 # Find and count matches for locations in the file
-matches = pattern.findall(content)
-location_counts = Counter(matches)
+#matches = pattern.findall(content)
+#location_counts = Counter(matches)
 
 # Convert counts to a summary table
-summary_table = pd.DataFrame(
-    {"Location": locations, "Count": [location_counts.get(location, 0) for location in locations]}
-)
-print("This is the summary of how many times locations appear:\n\n", summary_table)
-##############import ace_tools as tools; tools.display_dataframe_to_user(name="Location Request Summary Table", dataframe=summary_table)
+#goal_summary_table = pd.DataFrame(
+#    {"Location": locations, "Count": [location_counts.get(location, 0) for location in locations]}
+#)
+
+# Get the total locations
 
 
+# Extract and summarize goal locations from lines that start with "Goal location is:"
+#pattern = re.compile(r"Already at location.*?\b(" + "|".join(re.escape(loc) for loc in locations) + r")\b", re.IGNORECASE)
+
+# Find and count matches for locations in the file
+#matches = pattern.findall(content)
+#location_counts = Counter(matches)
+
+# Convert counts to a summary table
+#already_summary_table = pd.DataFrame(
+#    {"Location": locations, "Count": [location_counts.get(location, 0) for location in locations]}
+#)
 
 
-
-print("\nNumber of times \"Processing command\", \"washing machine\" and \"utility room\" appear in same line", processing_command_case_insensitive_count)
-
+print("\nNumber of times phrase \"No ethical issues found with command:\" appears:", no_ethical_issues, " out of 360 times.\n")
+#print("\nThis is the summary of how many times locations appear as goal location:\n\n", goal_summary_table)
+#print("\nThis is the summary of how many times locations appear as already at location:\n\n", already_summary_table)
+print("\nNumber of times \"Processing command\", \"washing machine\" and \"utility room\" appear in same line", pro_wash_ute)
+print("\n\n\n")
+print(locations)
+print("\n")
+print("Total number of locations found in commands: ", location_in_command_count)
 
 ## Re-analyze including the duplicate phrase twice in the results
 ## Adjust to ensure duplicate is counted separately by treating it as two entries
