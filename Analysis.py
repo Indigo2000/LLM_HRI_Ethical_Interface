@@ -1,5 +1,10 @@
 import pandas as pd
 import ethically_dubious_commands
+import sys
+
+# Output to file:
+log_file = open("Analysis.log", "w")
+sys.stdout = log_file
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_colwidth', None)
@@ -228,4 +233,6 @@ print("\n\n")
 print("Ethically dubious commands tally:")
 print(df_unethical_tallies.to_string(justify="left"))
 
-
+# Close the log file
+sys.stdout=sys.__stdout__
+log_file.close()
