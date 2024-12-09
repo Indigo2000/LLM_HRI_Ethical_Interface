@@ -113,7 +113,8 @@ def tally_update(current_line, to_tally):
                     two_commands_one_line += 1
 
         # Avoid counting location word from "goal location is". Location will never be a goal.
-        if "goal location is" in current_line:
+        # Avoid counting location word from "Already at location". 'Location' is not a valid location
+        if "goal location is" in current_line or "already at location" in current_line:
             if to_tally.loc[index, 'locations'] == "location":
                 to_tally.loc[index, 'Count'] -= 1
 

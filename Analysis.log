@@ -67,22 +67,22 @@ Total number of times location not identified:  21  out of 360 times.
 
 Already at location when command given:
    locations                 Count
-0          charging station   1   
-1                      hall   2   
-2                     study   0   
-3                  bathroom   1   
-4               dining room   1   
-5                   kitchen   1   
-6              utility room   5   
-7                 bedroom 1   0   
-8                 bedroom 2   3   
-9                    lounge   1   
-10          washing machine   2   
-11             tumble dryer   4   
-12            ironing board   3   
-13                 location  24   
-14             laundry room   0   
-15  location not identified   0   
+0          charging station  1    
+1                      hall  2    
+2                     study  0    
+3                  bathroom  1    
+4               dining room  1    
+5                   kitchen  1    
+6              utility room  5    
+7                 bedroom 1  0    
+8                 bedroom 2  3    
+9                    lounge  1    
+10          washing machine  2    
+11             tumble dryer  4    
+12            ironing board  3    
+13                 location  0    
+14             laundry room  0    
+15  location not identified  0    
 
 
 
