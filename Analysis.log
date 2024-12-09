@@ -1,83 +1,754 @@
 
-Number of times phrase "No ethical issues found with command:" appears: 0  out of 360 times.
+Number of times phrase "No ethical issues found with command:" appears: 360  out of 360 times.
 
 
-Number of times "Processing command", "washing machine" and "utility room" appear in same line 0
+Number of times "Processing command", "washing machine" and "utility room" appear in same line 32
 
 
 Instructed to location:
    locations                 Count
-0          charging station  0    
-1                      hall  0    
-2                     study  0    
-3                  bathroom  0    
-4               dining room  0    
-5                   kitchen  0    
-6              utility room  0    
-7                 bedroom 1  0    
-8                 bedroom 2  0    
-9                    lounge  0    
-10          washing machine  0    
-11             tumble dryer  0    
-12            ironing board  0    
-13                 location  0    
-14             laundry room  0    
-15  location not identified  0    
+0          charging station  29   
+1                      hall  22   
+2                     study   2   
+3                  bathroom  27   
+4               dining room  21   
+5                   kitchen  27   
+6              utility room  40   
+7                 bedroom 1  22   
+8                 bedroom 2  36   
+9                    lounge  29   
+10          washing machine  82   
+11             tumble dryer  28   
+12            ironing board  23   
+13                 location  10   
+14             laundry room  13   
+15  location not identified   0   
 
-Number of times more than one location given in command:  0  out of 360 times.
+Number of times more than one location given in command:  51  out of 360 times.
 
 
 
-Total number of locations found in commands:  0  out of 360 times.
+Total number of locations found in commands:  411  out of 360 times.
 
 
 
 Goals selected:
    locations                 Count
-0          charging station  0    
-1                      hall  0    
-2                     study  0    
-3                  bathroom  0    
-4               dining room  0    
-5                   kitchen  0    
-6              utility room  0    
-7                 bedroom 1  0    
-8                 bedroom 2  0    
-9                    lounge  0    
-10          washing machine  0    
-11             tumble dryer  0    
-12            ironing board  0    
-13                 location  0    
-14             laundry room  0    
-15  location not identified  0    
+0          charging station  27   
+1                      hall  20   
+2                     study   2   
+3                  bathroom  26   
+4               dining room  20   
+5                   kitchen  26   
+6              utility room  34   
+7                 bedroom 1  22   
+8                 bedroom 2  33   
+9                    lounge  28   
+10          washing machine  33   
+11             tumble dryer  24   
+12            ironing board  20   
+13                 location   0   
+14             laundry room   0   
+15  location not identified   0   
 
 
-Total number of goals identified:  0  out of 360 times.
-
-
-
-Total number of times robot already there:  0  out of 360 times.
+Total number of goals identified:  315  out of 360 times.
 
 
 
-Total number of times location not identified:  0  out of 360 times.
+Total number of times robot already there:  24  out of 360 times.
+
+
+
+Total number of times location not identified:  21  out of 360 times.
 
 
 
 
 Queue operation - command given then command processing:
-Empty DataFrame
-Columns: []
-Index: []
+    Given Command                                                                          Processed Command                                                                      
+0                                         please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+1                                           please pick up the dirty laundry in the hall.                                            please pick up the dirty laundry in the hall.
+2                                           please pick up the dirty laundry in the hall.                                            please pick up the dirty laundry in the hall.
+3                                       please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+4                                    please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+5                                         please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+6                                       please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+7         please go to the laundry room and put the dirty laundry in the washing machine.          please go to the laundry room and put the dirty laundry in the washing machine.
+8                                         please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+9                                         please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+10                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+11                                    please pick up the dirty laundry from the bathroom.                                      please pick up the dirty laundry from the bathroom.
+12                                            please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+13                                       at the ironing board, please iron these clothes.                                         at the ironing board, please iron these clothes.
+14                                  please go to bedroom 2 and pick up the dirty laundry.                                    please go to bedroom 2 and pick up the dirty laundry.
+15                           please go to the utility room and pick up the dirty laundry.                             please go to the utility room and pick up the dirty laundry.
+16                                        please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+17                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+18                                  please pick up the dirty laundry in the utility room.                                    please pick up the dirty laundry in the utility room.
+19    please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+20                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+21                                            please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+22                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+23                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+24                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+25                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+26                                  in the dining room, please pick up the dirty laundry.                                    in the dining room, please pick up the dirty laundry.
+27        please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+28                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+29              in the utility room, please put the dirty laundry in the washing machine.                in the utility room, please put the dirty laundry in the washing machine.
+30                            please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+31                                        please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+32                                         please pick up the dirty laundry in bedroom 1.                                           please pick up the dirty laundry in bedroom 1.
+33                                      in the kitchen, please pick up the dirty laundry.                                        in the kitchen, please pick up the dirty laundry.
+34                                         please pick up the dirty laundry in bedroom 1.                                           please pick up the dirty laundry in bedroom 1.
+35                                   please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+36                             please pick up the dirty laundry from the washing machine.                               please pick up the dirty laundry from the washing machine.
+37              in the utility room, please put the dirty laundry in the washing machine.                in the utility room, please put the dirty laundry in the washing machine.
+38                                            please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+39   please go to the location and sort this clean laundry according to where it belongs.     please go to the location and sort this clean laundry according to where it belongs.
+40                                   please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+41                                        in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+42                                   please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+43                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+44                              please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+45                                  please go to bedroom 2 and pick up the dirty laundry.                                    please go to bedroom 2 and pick up the dirty laundry.
+46    please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+47                                        please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+48                                      in the kitchen, please pick up the dirty laundry.                                        in the kitchen, please pick up the dirty laundry.
+49                                        please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+50                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+51                                   please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+52                                         in the hall, please pick up the dirty laundry.                                           in the hall, please pick up the dirty laundry.
+53                                   please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+54                                         please pick up the dirty laundry in bedroom 1.                                           please pick up the dirty laundry in bedroom 1.
+55                                   please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+56           at the washing machine, please put the dirty laundry in the washing machine.             at the washing machine, please put the dirty laundry in the washing machine.
+57                                        please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+58                                   please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+59                                   please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+60                                   please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+61                                        in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+62                                            please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+63                                   please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+64                                         please pick up the dirty laundry in bedroom 2.                                           please pick up the dirty laundry in bedroom 2.
+65                                            please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+66                                         please pick up the dirty laundry in the study.                                           please pick up the dirty laundry in the study.
+67                                   please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+68        please go to the laundry room and put the dirty laundry in the washing machine.          please go to the laundry room and put the dirty laundry in the washing machine.
+69                                        please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+70                                   please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+71        please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+72        please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+73    please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+74                                            please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+75                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+76                                  please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+77                                        in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+78                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+79                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+80                                 please go to the ironing board and iron these clothes.                                   please go to the ironing board and iron these clothes.
+81                                            please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+82                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+83                                       please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+84                                  please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+85                             please pick up the dirty laundry from the washing machine.                               please pick up the dirty laundry from the washing machine.
+86                                   please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+87                                   please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+88        please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+89    please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+90                                   please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+91                       please go to the charging station and pick up the dirty laundry.                         please go to the charging station and pick up the dirty laundry.
+92                                   please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+93                                        please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+94                              please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+95                              please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+96        please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+97                                      please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+98                                   please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+99                                   please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+100       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+101                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+102                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+103                                 please go to bedroom 1 and pick up the dirty laundry.                                    please go to bedroom 1 and pick up the dirty laundry.
+104                      please go to the charging station and pick up the dirty laundry.                         please go to the charging station and pick up the dirty laundry.
+105                                    please go to the location and hang up the washing.                                       please go to the location and hang up the washing.
+106  please sort this clean laundry according to where it belongs at the washing machine.     please sort this clean laundry according to where it belongs at the washing machine.
+107                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+108  please sort this clean laundry according to where it belongs at the washing machine.     please sort this clean laundry according to where it belongs at the washing machine.
+109                                  please go to bedroom 1 and neatly fold this laundry.                                     please go to bedroom 1 and neatly fold this laundry.
+110                             please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+111                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+112                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+113                                       in bedroom 2, please pick up the dirty laundry.                                          in bedroom 2, please pick up the dirty laundry.
+114                                   please pick up the dirty laundry from the bathroom.                                      please pick up the dirty laundry from the bathroom.
+115                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+116                                       in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+117                            please go to the dining room and neatly fold this laundry.                               please go to the dining room and neatly fold this laundry.
+118       please go to the laundry room and put the dirty laundry in the washing machine.          please go to the laundry room and put the dirty laundry in the washing machine.
+119                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+120       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+121   please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+122                               please go to the location and neatly fold this laundry.                                  please go to the location and neatly fold this laundry.
+123                           please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+124                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+125                            please go to the dining room and neatly fold this laundry.                               please go to the dining room and neatly fold this laundry.
+126                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+127                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+128       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+129                            please go to the dining room and neatly fold this laundry.                               please go to the dining room and neatly fold this laundry.
+130                                   please pick up the dirty laundry from the bathroom.                                      please pick up the dirty laundry from the bathroom.
+131                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+132  please sort this clean laundry according to where it belongs at the washing machine.     please sort this clean laundry according to where it belongs at the washing machine.
+133                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+134                           please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+135                              please go to the bathroom and pick up the dirty laundry.                                 please go to the bathroom and pick up the dirty laundry.
+136                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+137                                       please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+138       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+139                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+140                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+141                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+142                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+143             in the utility room, please put the dirty laundry in the washing machine.                in the utility room, please put the dirty laundry in the washing machine.
+144                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+145                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+146                                        please pick up the dirty laundry in bedroom 1.                                           please pick up the dirty laundry in bedroom 1.
+147                                       please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+148                                  please go to bedroom 1 and neatly fold this laundry.                                     please go to bedroom 1 and neatly fold this laundry.
+149                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+150                           please pick up the dirty laundry from the charging station.                              please pick up the dirty laundry from the charging station.
+151                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+152                                  please go to bedroom 1 and neatly fold this laundry.                                     please go to bedroom 1 and neatly fold this laundry.
+153                           please pick up the dirty laundry from the charging station.                              please pick up the dirty laundry from the charging station.
+154                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+155   please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+156                                 please go to bedroom 1 and pick up the dirty laundry.                                    please go to bedroom 1 and pick up the dirty laundry.
+157                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+158                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+159                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+160                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+161   please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+162                           please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+163                                    please go to the location and hang up the washing.                                       please go to the location and hang up the washing.
+164       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+165                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+166       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+167                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+168                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+169                             please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+170                               could you please pick up the dirty laundry in the hall?                                  could you please pick up the dirty laundry in the hall?
+171                          please go to the utility room and pick up the dirty laundry.                             please go to the utility room and pick up the dirty laundry.
+172                                  please go to bedroom 1 and neatly fold this laundry.                                     please go to bedroom 1 and neatly fold this laundry.
+173                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+174                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+175                               please go to the location and neatly fold this laundry.                                  please go to the location and neatly fold this laundry.
+176                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+177                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+178                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+179                                       please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+180                                  please go to bedroom 1 and neatly fold this laundry.                                     please go to bedroom 1 and neatly fold this laundry.
+181                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+182                           please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+183                           please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+184                                in the utility room, please pick up the dirty laundry.                                   in the utility room, please pick up the dirty laundry.
+185                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+186                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+187                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+188                           please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+189                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+190                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+191       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+192                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+193                             please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+194                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+195                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+196                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+197                                       please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+198       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+199                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+200                           please pick up the dirty laundry from the charging station.                              please pick up the dirty laundry from the charging station.
+201              please go to bedroom 2 and put the dirty laundry in the washing machine.                 please go to bedroom 2 and put the dirty laundry in the washing machine.
+202                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+203                                        please pick up the dirty laundry in bedroom 1.                                           please pick up the dirty laundry in bedroom 1.
+204                            please pick up the dirty laundry from the washing machine.                               please pick up the dirty laundry from the washing machine.
+205                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+206                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+207                          please go to the utility room and pick up the dirty laundry.                             please go to the utility room and pick up the dirty laundry.
+208                                       please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+209                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+210   please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+211                               please go to the location and neatly fold this laundry.                                  please go to the location and neatly fold this laundry.
+212                                       in bedroom 2, please pick up the dirty laundry.                                          in bedroom 2, please pick up the dirty laundry.
+213                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+214                                       in bedroom 2, please pick up the dirty laundry.                                          in bedroom 2, please pick up the dirty laundry.
+215              please go to the study and put the dirty laundry in the washing machine.                 please go to the study and put the dirty laundry in the washing machine.
+216       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+217                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+218                                       in bedroom 2, please pick up the dirty laundry.                                          in bedroom 2, please pick up the dirty laundry.
+219                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+220                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+221                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+222                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+223       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+224                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+225                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+226       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+227                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+228                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+229                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+230                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+231                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+232                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+233                           please pick up the dirty laundry from the charging station.                              please pick up the dirty laundry from the charging station.
+234                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+235                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+236       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+237       please go to the laundry room and put the dirty laundry in the washing machine.          please go to the laundry room and put the dirty laundry in the washing machine.
+238                              please go to the bathroom and pick up the dirty laundry.                                 please go to the bathroom and pick up the dirty laundry.
+239          please put the dirty laundry in the washing machine at the charging station.             please put the dirty laundry in the washing machine at the charging station.
+240                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+241       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+242                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+243                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+244                                       in bedroom 2, please pick up the dirty laundry.                                          in bedroom 2, please pick up the dirty laundry.
+245             in the utility room, please put the dirty laundry in the washing machine.                in the utility room, please put the dirty laundry in the washing machine.
+246                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+247                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+248  please sort this clean laundry according to where it belongs at the washing machine.     please sort this clean laundry according to where it belongs at the washing machine.
+249   please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+250                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+251                                        please pick up the dirty laundry in bedroom 2.                                           please pick up the dirty laundry in bedroom 2.
+252                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+253                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+254                                       please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+255                          please go to the utility room and pick up the dirty laundry.                             please go to the utility room and pick up the dirty laundry.
+256                                       in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+257                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+258                                  please go to bedroom 1 and neatly fold this laundry.                                     please go to bedroom 1 and neatly fold this laundry.
+259   please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+260  please sort this clean laundry according to where it belongs at the washing machine.     please sort this clean laundry according to where it belongs at the washing machine.
+261                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+262                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+263                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+264                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+265                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+266                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+267                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+268                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+269                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+270                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+271   please go to the charging station and put the dirty laundry in the washing machine.      please go to the charging station and put the dirty laundry in the washing machine.
+272                                       please pick up the dirty laundry in the lounge.                                          please pick up the dirty laundry in the lounge.
+273                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+274                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+275                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+276                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+277                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+278                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+279                            please go to the dining room and neatly fold this laundry.                               please go to the dining room and neatly fold this laundry.
+280                               please go to the location and neatly fold this laundry.                                  please go to the location and neatly fold this laundry.
+281                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+282                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+283                      please go to the charging station and pick up the dirty laundry.                         please go to the charging station and pick up the dirty laundry.
+284                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+285                             please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+286            please go to the kitchen and put the dirty laundry in the washing machine.               please go to the kitchen and put the dirty laundry in the washing machine.
+287                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+288                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+289                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+290                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+291                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+292                                       in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+293       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+294                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+295                            please pick up the dirty laundry from the washing machine.                               please pick up the dirty laundry from the washing machine.
+296                      please go to the charging station and pick up the dirty laundry.                         please go to the charging station and pick up the dirty laundry.
+297                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+298       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+299                          please go to the utility room and pick up the dirty laundry.                             please go to the utility room and pick up the dirty laundry.
+300                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+301       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+302                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+303                           please go to the laundry room and neatly fold this laundry.                              please go to the laundry room and neatly fold this laundry.
+304                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+305                            please pick up the dirty laundry from the washing machine.                               please pick up the dirty laundry from the washing machine.
+306                                  please pick up the dirty laundry in the dining room.                                     please pick up the dirty laundry in the dining room.
+307                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+308                                         please pick up the dirty laundry in the hall.                                            please pick up the dirty laundry in the hall.
+309                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+310                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+311                                please go to the laundry room and hang up the washing.                                   please go to the laundry room and hang up the washing.
+312                               please go to the location and neatly fold this laundry.                                  please go to the location and neatly fold this laundry.
+313                                please go to the ironing board and iron these clothes.                                   please go to the ironing board and iron these clothes.
+314                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+315                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+316                             please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+317                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+318                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+319                                         please pick up the dirty laundry in the hall.                                            please pick up the dirty laundry in the hall.
+320       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+321                             could you please pick up the dirty laundry in the lounge?                                could you please pick up the dirty laundry in the lounge?
+322                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+323                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+324                                       please iron these clothes at the ironing board.                                          please iron these clothes at the ironing board.
+325                                      at the ironing board, please iron these clothes.                                         at the ironing board, please iron these clothes.
+326       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+327                            please pick up the dirty laundry from the washing machine.                               please pick up the dirty laundry from the washing machine.
+328                               please go to the location and neatly fold this laundry.                                  please go to the location and neatly fold this laundry.
+329       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+330                             please pick up the dirty laundry at the charging station.                                please pick up the dirty laundry at the charging station.
+331                                 please go to bedroom 2 and pick up the dirty laundry.                                    please go to bedroom 2 and pick up the dirty laundry.
+332                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+333                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+334                                     please pick up the dirty laundry from the lounge.                                        please pick up the dirty laundry from the lounge.
+335                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+336                                       in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+337                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+338                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+339                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+340                            please go to the dining room and neatly fold this laundry.                               please go to the dining room and neatly fold this laundry.
+341                                       in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+342                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+343       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+344                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+345                                           please put the laundry in the tumble dryer.                                              please put the laundry in the tumble dryer.
+346                               please go to the location and neatly fold this laundry.                                  please go to the location and neatly fold this laundry.
+347       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+348                                in the utility room, please pick up the dirty laundry.                                   in the utility room, please pick up the dirty laundry.
+349       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+350                                       in bedroom 1, please pick up the dirty laundry.                                          in bedroom 1, please pick up the dirty laundry.
+351                                  please go to the hall and pick up the dirty laundry.                                     please go to the hall and pick up the dirty laundry.
+352                                 please go to the lounge and neatly fold this laundry.                                    please go to the lounge and neatly fold this laundry.
+353                                  please put the dirty laundry in the washing machine.                                     please put the dirty laundry in the washing machine.
+354                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+355                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
+356                                     please pick up the dirty laundry in the bathroom.                                        please pick up the dirty laundry in the bathroom.
+357                                      please pick up the dirty laundry in the kitchen.                                         please pick up the dirty laundry in the kitchen.
+358       please go to the utility room and put the dirty laundry in the washing machine.          please go to the utility room and put the dirty laundry in the washing machine.
+359                                  please go to bedroom 2 and neatly fold this laundry.                                     please go to bedroom 2 and neatly fold this laundry.
 
- 0  out of 360 commands queued and processed correctly
+ 360  out of 360 commands queued and processed correctly
 
 
 
 A* route check:
-Empty DataFrame
-Columns: []
-Index: []
+    Start             Goal              Route                                                     
+0    charging station            lounge                                           'hall', 'lounge'
+1              lounge              hall                                                     'hall'
+2                hall          bathroom                                                 'bathroom'
+3            bathroom   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+4     washing machine            lounge            'utility room', 'dining room', 'hall', 'lounge'
+5              lounge          bathroom                                         'hall', 'bathroom'
+6            bathroom     ironing board     'hall', 'dining room', 'utility room', 'ironing board'
+7       ironing board            lounge            'utility room', 'dining room', 'hall', 'lounge'
+8              lounge          bathroom                                         'hall', 'bathroom'
+9            bathroom      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+10       tumble dryer     ironing board                                            'ironing board'
+11      ironing board         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+12          bedroom 2      utility room                      'hall', 'dining room', 'utility room'
+13       utility room     ironing board                                            'ironing board'
+14      ironing board           kitchen                   'utility room', 'dining room', 'kitchen'
+15            kitchen      utility room                              'dining room', 'utility room'
+16       utility room  charging station                  'dining room', 'hall', 'charging station'
+17   charging station           kitchen                           'hall', 'dining room', 'kitchen'
+18            kitchen      tumble dryer              'dining room', 'utility room', 'tumble dryer'
+19       tumble dryer           kitchen                   'utility room', 'dining room', 'kitchen'
+20            kitchen          bathroom                          'dining room', 'hall', 'bathroom'
+21           bathroom           kitchen                           'hall', 'dining room', 'kitchen'
+22            kitchen       dining room                                              'dining room'
+23        dining room      utility room                                             'utility room'
+24       utility room           kitchen                                   'dining room', 'kitchen'
+25            kitchen   washing machine           'dining room', 'utility room', 'washing machine'
+26    washing machine     ironing board                                            'ironing board'
+27      ironing board         bedroom 1         'utility room', 'dining room', 'hall', 'bedroom 1'
+28          bedroom 1           kitchen                           'hall', 'dining room', 'kitchen'
+29            kitchen         bedroom 1                         'dining room', 'hall', 'bedroom 1'
+30          bedroom 1       dining room                                      'hall', 'dining room'
+31        dining room   washing machine                          'utility room', 'washing machine'
+32    washing machine      tumble dryer                                             'tumble dryer'
+33       tumble dryer       dining room                              'utility room', 'dining room'
+34        dining room         bedroom 1                                        'hall', 'bedroom 1'
+35          bedroom 1   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+36    washing machine          bathroom          'utility room', 'dining room', 'hall', 'bathroom'
+37           bathroom  charging station                                 'hall', 'charging station'
+38   charging station         bedroom 2                                        'hall', 'bedroom 2'
+39          bedroom 2  charging station                                 'hall', 'charging station'
+40   charging station            lounge                                           'hall', 'lounge'
+41             lounge           kitchen                           'hall', 'dining room', 'kitchen'
+42            kitchen     ironing board             'dining room', 'utility room', 'ironing board'
+43      ironing board          bathroom          'utility room', 'dining room', 'hall', 'bathroom'
+44           bathroom       dining room                                      'hall', 'dining room'
+45        dining room              hall                                                     'hall'
+46               hall       dining room                                              'dining room'
+47        dining room         bedroom 1                                        'hall', 'bedroom 1'
+48          bedroom 1         bedroom 2                                                'bedroom 2'
+49          bedroom 2   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+50    washing machine     ironing board                                            'ironing board'
+51      ironing board         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+52          bedroom 2   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+53    washing machine         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+54          bedroom 2         bedroom 1                                                'bedroom 1'
+55          bedroom 1      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+56       tumble dryer   washing machine                          'utility room', 'washing machine'
+57    washing machine         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+58          bedroom 2      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+59       tumble dryer             study             'utility room', 'dining room', 'hall', 'study'
+60              study              hall                                                     'hall'
+61               hall            lounge                                                   'lounge'
+62             lounge              hall                                                     'hall'
+63               hall      utility room                              'dining room', 'utility room'
+64       utility room  charging station                  'dining room', 'hall', 'charging station'
+65   charging station      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+66       tumble dryer          bathroom          'utility room', 'dining room', 'hall', 'bathroom'
+67           bathroom            lounge                                           'hall', 'lounge'
+68             lounge         bedroom 1                                        'hall', 'bedroom 1'
+69          bedroom 1          bathroom                                         'hall', 'bathroom'
+70           bathroom           kitchen                           'hall', 'dining room', 'kitchen'
+71            kitchen     ironing board             'dining room', 'utility room', 'ironing board'
+72      ironing board      tumble dryer                                             'tumble dryer'
+73       tumble dryer          bathroom          'utility room', 'dining room', 'hall', 'bathroom'
+74           bathroom           kitchen                           'hall', 'dining room', 'kitchen'
+75            kitchen            lounge                            'dining room', 'hall', 'lounge'
+76             lounge   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+77    washing machine       dining room                              'utility room', 'dining room'
+78        dining room   washing machine                          'utility room', 'washing machine'
+79    washing machine      utility room                                             'utility room'
+80       utility room  charging station                  'dining room', 'hall', 'charging station'
+81   charging station         bedroom 2                                        'hall', 'bedroom 2'
+82          bedroom 2  charging station                                 'hall', 'charging station'
+83   charging station         bedroom 2                                        'hall', 'bedroom 2'
+84          bedroom 2            lounge                                           'hall', 'lounge'
+85             lounge  charging station                                 'hall', 'charging station'
+86   charging station      utility room                      'hall', 'dining room', 'utility room'
+87       utility room          bathroom                          'dining room', 'hall', 'bathroom'
+88           bathroom       dining room                                      'hall', 'dining room'
+89        dining room      utility room                                             'utility room'
+90       utility room     ironing board                                            'ironing board'
+91      ironing board         bedroom 1         'utility room', 'dining room', 'hall', 'bedroom 1'
+92          bedroom 1  charging station                                 'hall', 'charging station'
+93   charging station   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+94    washing machine     ironing board                                            'ironing board'
+95      ironing board         bedroom 1         'utility room', 'dining room', 'hall', 'bedroom 1'
+96          bedroom 1  charging station                                 'hall', 'charging station'
+97   charging station           kitchen                           'hall', 'dining room', 'kitchen'
+98            kitchen         bedroom 2                         'dining room', 'hall', 'bedroom 2'
+99          bedroom 2          bathroom                                         'hall', 'bathroom'
+100          bathroom      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+101      tumble dryer         bedroom 1         'utility room', 'dining room', 'hall', 'bedroom 1'
+102         bedroom 1       dining room                                      'hall', 'dining room'
+103       dining room   washing machine                          'utility room', 'washing machine'
+104   washing machine      utility room                                             'utility room'
+105      utility room  charging station                  'dining room', 'hall', 'charging station'
+106  charging station          bathroom                                         'hall', 'bathroom'
+107          bathroom       dining room                                      'hall', 'dining room'
+108       dining room          bathroom                                         'hall', 'bathroom'
+109          bathroom      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+110      tumble dryer      utility room                                             'utility room'
+111      utility room       dining room                                              'dining room'
+112       dining room          bathroom                                         'hall', 'bathroom'
+113          bathroom           kitchen                           'hall', 'dining room', 'kitchen'
+114           kitchen   washing machine           'dining room', 'utility room', 'washing machine'
+115   washing machine         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+116         bedroom 2          bathroom                                         'hall', 'bathroom'
+117          bathroom            lounge                                           'hall', 'lounge'
+118            lounge      utility room                      'hall', 'dining room', 'utility room'
+119      utility room           kitchen                                   'dining room', 'kitchen'
+120           kitchen         bedroom 2                         'dining room', 'hall', 'bedroom 2'
+121         bedroom 2              hall                                                     'hall'
+122              hall   washing machine           'dining room', 'utility room', 'washing machine'
+123   washing machine      tumble dryer                                             'tumble dryer'
+124      tumble dryer         bedroom 1         'utility room', 'dining room', 'hall', 'bedroom 1'
+125         bedroom 1            lounge                                           'hall', 'lounge'
+126            lounge         bedroom 1                                        'hall', 'bedroom 1'
+127         bedroom 1   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+128   washing machine  charging station  'utility room', 'dining room', 'hall', 'charging station'
+129  charging station      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+130      tumble dryer         bedroom 1         'utility room', 'dining room', 'hall', 'bedroom 1'
+131         bedroom 1  charging station                                 'hall', 'charging station'
+132  charging station              hall                                                     'hall'
+133              hall  charging station                                         'charging station'
+134  charging station         bedroom 1                                        'hall', 'bedroom 1'
+135         bedroom 1          bathroom                                         'hall', 'bathroom'
+136          bathroom         bedroom 2                                        'hall', 'bedroom 2'
+137         bedroom 2            lounge                                           'hall', 'lounge'
+138            lounge   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+139   washing machine  charging station  'utility room', 'dining room', 'hall', 'charging station'
+140  charging station      utility room                      'hall', 'dining room', 'utility room'
+141      utility room           kitchen                                   'dining room', 'kitchen'
+142           kitchen      utility room                              'dining room', 'utility room'
+143      utility room            lounge                            'dining room', 'hall', 'lounge'
+144            lounge     ironing board     'hall', 'dining room', 'utility room', 'ironing board'
+145     ironing board  charging station  'utility room', 'dining room', 'hall', 'charging station'
+146  charging station              hall                                                     'hall'
+147              hall      utility room                              'dining room', 'utility room'
+148      utility room         bedroom 1                         'dining room', 'hall', 'bedroom 1'
+149         bedroom 1       dining room                                      'hall', 'dining room'
+150       dining room   washing machine                          'utility room', 'washing machine'
+151   washing machine      tumble dryer                                             'tumble dryer'
+152      tumble dryer              hall                      'utility room', 'dining room', 'hall'
+153              hall         bedroom 2                                                'bedroom 2'
+154         bedroom 2            lounge                                           'hall', 'lounge'
+155            lounge         bedroom 1                                        'hall', 'bedroom 1'
+156         bedroom 1         bedroom 2                                                'bedroom 2'
+157         bedroom 2      utility room                      'hall', 'dining room', 'utility room'
+158      utility room   washing machine                                          'washing machine'
+159   washing machine      tumble dryer                                             'tumble dryer'
+160      tumble dryer         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+161         bedroom 2      utility room                      'hall', 'dining room', 'utility room'
+162      utility room              hall                                      'dining room', 'hall'
+163              hall           kitchen                                   'dining room', 'kitchen'
+164           kitchen      utility room                              'dining room', 'utility room'
+165      utility room     ironing board                                            'ironing board'
+166     ironing board  charging station  'utility room', 'dining room', 'hall', 'charging station'
+167  charging station   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+168   washing machine           kitchen                   'utility room', 'dining room', 'kitchen'
+169           kitchen              hall                                      'dining room', 'hall'
+170              hall            lounge                                                   'lounge'
+171            lounge      utility room                      'hall', 'dining room', 'utility room'
+172      utility room            lounge                            'dining room', 'hall', 'lounge'
+173            lounge  charging station                                 'hall', 'charging station'
+174  charging station         bedroom 2                                        'hall', 'bedroom 2'
+175         bedroom 2           kitchen                           'hall', 'dining room', 'kitchen'
+176           kitchen         bedroom 1                         'dining room', 'hall', 'bedroom 1'
+177         bedroom 1   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+178   washing machine          bathroom          'utility room', 'dining room', 'hall', 'bathroom'
+179          bathroom            lounge                                           'hall', 'lounge'
+180            lounge      utility room                      'hall', 'dining room', 'utility room'
+181      utility room            lounge                            'dining room', 'hall', 'lounge'
+182            lounge      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+183      tumble dryer  charging station  'utility room', 'dining room', 'hall', 'charging station'
+184  charging station         bedroom 2                                        'hall', 'bedroom 2'
+185         bedroom 2   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+186   washing machine         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+187         bedroom 2             study                                            'hall', 'study'
+188             study      utility room                      'hall', 'dining room', 'utility room'
+189      utility room      tumble dryer                                             'tumble dryer'
+190      tumble dryer         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+191         bedroom 2       dining room                                      'hall', 'dining room'
+192       dining room              hall                                                     'hall'
+193              hall          bathroom                                                 'bathroom'
+194          bathroom         bedroom 2                                        'hall', 'bedroom 2'
+195         bedroom 2      utility room                      'hall', 'dining room', 'utility room'
+196      utility room         bedroom 2                         'dining room', 'hall', 'bedroom 2'
+197         bedroom 2          bathroom                                         'hall', 'bathroom'
+198          bathroom      utility room                      'hall', 'dining room', 'utility room'
+199      utility room              hall                                      'dining room', 'hall'
+200              hall      tumble dryer              'dining room', 'utility room', 'tumble dryer'
+201      tumble dryer              hall                      'utility room', 'dining room', 'hall'
+202              hall       dining room                                              'dining room'
+203       dining room      tumble dryer                             'utility room', 'tumble dryer'
+204      tumble dryer         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+205         bedroom 2  charging station                                 'hall', 'charging station'
+206  charging station     ironing board     'hall', 'dining room', 'utility room', 'ironing board'
+207     ironing board           kitchen                   'utility room', 'dining room', 'kitchen'
+208           kitchen      utility room                              'dining room', 'utility room'
+209      utility room          bathroom                          'dining room', 'hall', 'bathroom'
+210          bathroom   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+211   washing machine          bathroom          'utility room', 'dining room', 'hall', 'bathroom'
+212          bathroom      utility room                      'hall', 'dining room', 'utility room'
+213      utility room     ironing board                                            'ironing board'
+214     ironing board   washing machine                          'utility room', 'washing machine'
+215   washing machine         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+216         bedroom 2   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+217   washing machine           kitchen                   'utility room', 'dining room', 'kitchen'
+218           kitchen       dining room                                              'dining room'
+219       dining room   washing machine                          'utility room', 'washing machine'
+220   washing machine  charging station  'utility room', 'dining room', 'hall', 'charging station'
+221  charging station          bathroom                                         'hall', 'bathroom'
+222          bathroom         bedroom 2                                        'hall', 'bedroom 2'
+223         bedroom 2     ironing board     'hall', 'dining room', 'utility room', 'ironing board'
+224     ironing board      tumble dryer                                             'tumble dryer'
+225      tumble dryer            lounge            'utility room', 'dining room', 'hall', 'lounge'
+226            lounge      utility room                      'hall', 'dining room', 'utility room'
+227      utility room         bedroom 1                         'dining room', 'hall', 'bedroom 1'
+228         bedroom 1     ironing board     'hall', 'dining room', 'utility room', 'ironing board'
+229     ironing board         bedroom 1         'utility room', 'dining room', 'hall', 'bedroom 1'
+230         bedroom 1  charging station                                 'hall', 'charging station'
+231  charging station   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+232   washing machine         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+233         bedroom 2      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+234      tumble dryer   washing machine                          'utility room', 'washing machine'
+235   washing machine     ironing board                                            'ironing board'
+236     ironing board      tumble dryer                                             'tumble dryer'
+237      tumble dryer       dining room                              'utility room', 'dining room'
+238       dining room     ironing board                            'utility room', 'ironing board'
+239     ironing board  charging station  'utility room', 'dining room', 'hall', 'charging station'
+240  charging station            lounge                                           'hall', 'lounge'
+241            lounge           kitchen                           'hall', 'dining room', 'kitchen'
+242           kitchen      tumble dryer              'dining room', 'utility room', 'tumble dryer'
+243      tumble dryer            lounge            'utility room', 'dining room', 'hall', 'lounge'
+244            lounge              hall                                                     'hall'
+245              hall            lounge                                                   'lounge'
+246            lounge       dining room                                      'hall', 'dining room'
+247       dining room          bathroom                                         'hall', 'bathroom'
+248          bathroom         bedroom 2                                        'hall', 'bedroom 2'
+249         bedroom 2  charging station                                 'hall', 'charging station'
+250  charging station       dining room                                      'hall', 'dining room'
+251       dining room  charging station                                 'hall', 'charging station'
+252  charging station           kitchen                           'hall', 'dining room', 'kitchen'
+253           kitchen              hall                                      'dining room', 'hall'
+254              hall           kitchen                                   'dining room', 'kitchen'
+255           kitchen         bedroom 2                         'dining room', 'hall', 'bedroom 2'
+256         bedroom 2   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+257   washing machine       dining room                              'utility room', 'dining room'
+258       dining room         bedroom 1                                        'hall', 'bedroom 1'
+259         bedroom 1      utility room                      'hall', 'dining room', 'utility room'
+260      utility room            lounge                            'dining room', 'hall', 'lounge'
+261            lounge   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+262   washing machine  charging station  'utility room', 'dining room', 'hall', 'charging station'
+263  charging station     ironing board     'hall', 'dining room', 'utility room', 'ironing board'
+264     ironing board      utility room                                             'utility room'
+265      utility room          bathroom                          'dining room', 'hall', 'bathroom'
+266          bathroom      utility room                      'hall', 'dining room', 'utility room'
+267      utility room   washing machine                                          'washing machine'
+268   washing machine      utility room                                             'utility room'
+269      utility room      tumble dryer                                             'tumble dryer'
+270      tumble dryer   washing machine                          'utility room', 'washing machine'
+271   washing machine       dining room                              'utility room', 'dining room'
+272       dining room              hall                                                     'hall'
+273              hall         bedroom 2                                                'bedroom 2'
+274         bedroom 2           kitchen                           'hall', 'dining room', 'kitchen'
+275           kitchen     ironing board             'dining room', 'utility room', 'ironing board'
+276     ironing board         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+277         bedroom 2           kitchen                           'hall', 'dining room', 'kitchen'
+278           kitchen  charging station                  'dining room', 'hall', 'charging station'
+279  charging station            lounge                                           'hall', 'lounge'
+280            lounge         bedroom 2                                        'hall', 'bedroom 2'
+281         bedroom 2              hall                                                     'hall'
+282              hall      utility room                              'dining room', 'utility room'
+283      utility room            lounge                            'dining room', 'hall', 'lounge'
+284            lounge      tumble dryer      'hall', 'dining room', 'utility room', 'tumble dryer'
+285      tumble dryer           kitchen                   'utility room', 'dining room', 'kitchen'
+286           kitchen     ironing board             'dining room', 'utility room', 'ironing board'
+287     ironing board      utility room                                             'utility room'
+288      utility room   washing machine                                          'washing machine'
+289   washing machine      utility room                                             'utility room'
+290      utility room  charging station                  'dining room', 'hall', 'charging station'
+291  charging station         bedroom 2                                        'hall', 'bedroom 2'
+292         bedroom 2   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+293   washing machine              hall                      'utility room', 'dining room', 'hall'
+294              hall            lounge                                                   'lounge'
+295            lounge              hall                                                     'hall'
+296              hall         bedroom 1                                                'bedroom 1'
+297         bedroom 1          bathroom                                         'hall', 'bathroom'
+298          bathroom           kitchen                           'hall', 'dining room', 'kitchen'
+299           kitchen            lounge                            'dining room', 'hall', 'lounge'
+300            lounge       dining room                                      'hall', 'dining room'
+301       dining room         bedroom 1                                        'hall', 'bedroom 1'
+302         bedroom 1            lounge                                           'hall', 'lounge'
+303            lounge      utility room                      'hall', 'dining room', 'utility room'
+304      utility room      tumble dryer                                             'tumble dryer'
+305      tumble dryer      utility room                                             'utility room'
+306      utility room         bedroom 1                         'dining room', 'hall', 'bedroom 1'
+307         bedroom 1              hall                                                     'hall'
+308              hall            lounge                                                   'lounge'
+309            lounge   washing machine   'hall', 'dining room', 'utility room', 'washing machine'
+310   washing machine         bedroom 2         'utility room', 'dining room', 'hall', 'bedroom 2'
+311         bedroom 2          bathroom                                         'hall', 'bathroom'
+312          bathroom           kitchen                           'hall', 'dining room', 'kitchen'
+313           kitchen      utility room                              'dining room', 'utility room'
+314      utility room         bedroom 2                         'dining room', 'hall', 'bedroom 2'
 
 
 
