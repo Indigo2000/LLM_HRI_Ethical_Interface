@@ -3,6 +3,8 @@ import pkg_resources
 # Get the list of installed packages
 installed_packages = [f"{d.project_name}=={d.version}" for d in pkg_resources.working_set]
 
+installed_packages.sort()
+
 # Save to a file
 file_path = "installed_packages.txt"
 with open(file_path, "w") as file:
