@@ -94,24 +94,35 @@ actions = {
 
 # Implementation of A* search to return list of rooms to pass through
 async def a_star_search(graph, start, goal, h):
-    open_set = []
-    heapq.heappush(open_set, (h[start], 0, start, [(start, None)]))  # (f_score, g_score, current_node, path)
-    closed_set = set()
+    open_set = [] # list for storing 'min heap' structure of the priority queue heapq
 
+    # Set push the initial values passed to the function into the priority queue
+    heapq.heappush(open_set, (h[start], 0, start, [(start, None)]))  # (f_score, g_score, current_node, path)
+    closed_set = set() # For storing values already visited
+
+    # Look through priority until we find the goal, if the goal does not exist or cannot be reached, return none.
     while open_set:
         f_score, g_score, current_node, path = heapq.heappop(open_set)
+        # Return the path if the current node is the goal
         if current_node == goal:
             return path[1:]  # Exclude the initial None direction
+
+        # If current node is already in the closed set, restart the while loop
         if current_node in closed_set:
             continue
+
+        # Add the current node to the closed set
         closed_set.add(current_node)
 
+        # Explore the neighbours of the current node
         for neighbour, cost, direction in graph.get(current_node, []):
             if neighbour in closed_set:
                 continue
+            # If neighbour not yet explored, calculate new f(n) and update path
             tentative_g_score = g_score + cost
             tentative_f_score = tentative_g_score + h[neighbour] # A* calculation of cost f(n) = g(n) + h(n)
             new_path = path + [(neighbour)]
+            # Push updated costs, and path to open set for this node (contained in variable neighbour)
             heapq.heappush(open_set, (tentative_f_score, tentative_g_score, neighbour, new_path))
 
     return None
