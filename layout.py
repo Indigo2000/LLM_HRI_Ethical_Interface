@@ -20,54 +20,54 @@ h = {
 # Define the graph with directions
 graph = {
     'Hall': [
-        ('Charging Station', 1, 'diagonally back and right'),
-        ('Study', 1, 'left'),
-        ('Lounge', 1, 'diagonally forward and left'),
-        ('Dining Room', 1, 'diagonally forward and right'),
-        ('Bathroom', 1, 'right'),
-        ('Bedroom 1', 2, 'forward'),
-        ('Bedroom 2', 2, 'forward')
+        ('Charging Station', 2, 'diagonally back and right'),
+        ('Study', 2, 'left'),
+        ('Lounge', 2, 'diagonally forward and left'),
+        ('Dining Room', 2, 'diagonally forward and right'),
+        ('Bathroom', 2, 'right'),
+        ('Bedroom 1', 4, 'forward'),
+        ('Bedroom 2', 4, 'forward')
     ],
     'Charging Station': [
-    ('Hall', 1, 'diagonally forward and left')
+    ('Hall', 2, 'diagonally forward and left')
     ],
     'Study': [
-        ('Hall', 1, 'right')
+        ('Hall', 2, 'right')
     ],
     'Lounge': [
-        ('Hall', 1, 'diagonally back and right')
+        ('Hall', 2, 'diagonally back and right')
     ],
     'Dining Room': [
-        ('Hall', 1, 'diagonally back and left'),
-        ('Utility Room', 1, 'forward'),
-        ('Kitchen', 1, 'right')
+        ('Hall', 2, 'diagonally back and left'),
+        ('Utility Room', 2, 'forward'),
+        ('Kitchen', 2, 'right')
     ],
     'Bathroom': [
-        ('Hall', 1, 'left')
+        ('Hall', 2, 'left')
     ],
     'Utility Room': [
-        ('Dining Room', 1, 'back'),
-        ('Washing Machine', 1, 'right'),
-        ('Tumble Dryer', 1, 'left'),
-        ('Ironing Board', 1, 'forward')
+        ('Dining Room', 2, 'back'),
+        ('Washing Machine', 2, 'right'),
+        ('Tumble Dryer', 2, 'left'),
+        ('Ironing Board', 2, 'forward')
     ],
     'Washing Machine': [
-        ('Utility Room', 1, 'left')
+        ('Utility Room', 2, 'left')
     ],
     'Tumble Dryer': [
-        ('Utility Room', 1, 'right')
+        ('Utility Room', 2, 'right')
     ],
     'Ironing Board': [
-        ('Utility Room', 1, 'back')
+        ('Utility Room', 2, 'back')
     ],
     'Kitchen': [
-        ('Dining Room', 1, 'left')
+        ('Dining Room', 2, 'left')
     ],
     'Bedroom 1': [
-        ('Hall', 2, 'back')
+        ('Hall', 4, 'back')
     ],
     'Bedroom 2': [
-        ('Hall', 2, 'back')
+        ('Hall', 4, 'back')
     ],
 }
 
