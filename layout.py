@@ -21,61 +21,53 @@ h = {
 graph = {
     'Hall': [
         ('Charging Station', 1, 'diagonally back and right'),
-        ('Study', 5, 'left'),
-        ('Lounge', 10, 'diagonally forward and left'),
-        ('Dining Room', 10, 'diagonally forward and right'),
-        ('Bathroom', 5, 'right'),
-        ('Bedroom 1', 15, 'forward'),
-        ('Bedroom 2', 15, 'forward')
+        ('Study', 1, 'left'),
+        ('Lounge', 1, 'diagonally forward and left'),
+        ('Dining Room', 1, 'diagonally forward and right'),
+        ('Bathroom', 1, 'right'),
+        ('Bedroom 1', 2, 'forward'),
+        ('Bedroom 2', 2, 'forward')
     ],
     'Charging Station': [
     ('Hall', 1, 'diagonally forward and left')
     ],
     'Study': [
-        ('Hall', 5, 'right')
+        ('Hall', 1, 'right')
     ],
     'Lounge': [
-        ('Hall', 5, 'diagonally back and right')
+        ('Hall', 1, 'diagonally back and right')
     ],
     'Dining Room': [
-        ('Hall', 5, 'diagonally back and left'),
-        ('Utility Room', 5, 'forward'),
-        ('Kitchen', 5, 'right')
+        ('Hall', 1, 'diagonally back and left'),
+        ('Utility Room', 1, 'forward'),
+        ('Kitchen', 1, 'right')
     ],
     'Bathroom': [
-        ('Hall', 5, 'left')
+        ('Hall', 1, 'left')
     ],
     'Utility Room': [
-        ('Dining Room', 5, 'back'),
+        ('Dining Room', 1, 'back'),
         ('Washing Machine', 1, 'right'),
         ('Tumble Dryer', 1, 'left'),
         ('Ironing Board', 1, 'forward')
     ],
     'Washing Machine': [
-        ('Utility Room', 1, 'left'),
-        ('Tumble Dryer', 2, 'left'),
-        ('Ironing Board', 2, 'diagonally forward and left')
+        ('Utility Room', 1, 'left')
     ],
     'Tumble Dryer': [
-        ('Utility Room', 1, 'right'),
-        ('Washing Machine', 2, 'right'),
-        ('Ironing Board', 2, 'diagonally forward and right')
+        ('Utility Room', 1, 'right')
     ],
     'Ironing Board': [
-        ('Utility Room', 1, 'back'),
-        ('Washing Machine', 2, 'diagonally back and right'),
-        ('Tumble Dryer', 2, 'diagonally back and left')
+        ('Utility Room', 1, 'back')
     ],
     'Kitchen': [
-        ('Dining Room', 5, 'left')
+        ('Dining Room', 1, 'left')
     ],
     'Bedroom 1': [
-        ('Hall', 15, 'back'),
-        ('Bedroom 2', 5, 'right')
+        ('Hall', 2, 'back')
     ],
     'Bedroom 2': [
-        ('Hall', 15, 'back'),
-        ('Bedroom 1', 5, 'left')
+        ('Hall', 2, 'back')
     ],
 }
 
